@@ -46,12 +46,12 @@ def login_user():
 
 @app.route('/auth/register', methods =['POST'])
 def register_user():
-    email = request.form['email']
-    password = request.form['password']
-    if User.duplicate_register(email):
-        return render_template('register_duplicate_address.html')
-    else:
-        User.register(email, password)
+    # email = request.form['email']
+    # password = request.form['password']
+    # if User.duplicate_register(email):
+    #     return render_template('register_duplicate_address.html')
+    # else:
+    #     User.register(email, password)
         return render_template("choose_function.html", email=session['email'])
 
 @app.route('/extract_existing_info', methods = ['POST'])
