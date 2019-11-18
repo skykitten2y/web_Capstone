@@ -41,7 +41,7 @@ def login_user():
     elif User.address_valid(email, password):
         return render_template('login_wrong_password.html')
     else:
-        return render_template('choose_function.html')  #!!!
+        return render_template('register.html')
 
 
 @app.route('/auth/register', methods =['POST'])
@@ -57,9 +57,6 @@ def register_user():
 @app.route('/extract_existing_info', methods = ['POST'])
 def extract_existing():
     answer_q17 = request.form.get('q17')
-    session['answer_q17'] = request.form.get('q17')
-
-
     if(answer_q17 == 'Yes'):
         if Survey.survey_not_empty(session.get('email',None)):
             existing_survey = Survey.get_by_email(session.get('email', None))

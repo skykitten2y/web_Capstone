@@ -21,12 +21,6 @@ class User(object):
             return cls(**data)
 
 
-    def get_by_id(cls, _id):
-        data = Database.find_one("users", {"_id": _id})
-        if data is not None:
-            return cls(**data)
-
-
     @staticmethod
     def login_valid(email, password):
         # check whether a user's email matches the password they sent us

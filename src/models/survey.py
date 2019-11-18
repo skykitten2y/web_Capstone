@@ -39,22 +39,20 @@ class Survey(object):
                         data=self.json())
         pass
 
-    @classmethod
-    #search by id
-    def from_mongo(cls, id):
-        survey_data = Database.find_one(collection='surveys', query={'_id': id})
-        return cls(**survey_data)  # returning a object of type survey,  ** gets the same names of the element into the variables
+
 
     @classmethod
 
     def get_by_email(cls,email):
         return [survey for survey in Database.find(collection = 'surveys',query = {'email':email})]
 
-    @classmethod
-    def check_by_email(cls, email):
-        data = Database.find_one("surveys", {"email": email})
+
+    def check_by_email(email):
+        data = Database.find_one(collection = 'surveys',query = {'email':email})
         if data is not None:
-            return cls(**data)
+            return data
+
+
 
     @staticmethod
     def survey_not_empty(email):
