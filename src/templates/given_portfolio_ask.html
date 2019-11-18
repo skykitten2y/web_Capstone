@@ -1,0 +1,339 @@
+<html>
+    <head>
+        <title>Add/Remove Input Fields Dynamically with jQuery</title>
+
+
+    </head>
+
+    <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" media="screen" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.9.3/css/bootstrap-select.min.css">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.9.3/js/bootstrap-select.min.js"></script>
+
+
+	<script>
+    $(document).ready(function() {
+      $('.selectpicker').selectpicker({
+        style: 'btn-info',
+        size: 4
+      });
+
+
+    var max_fields      = 25; //maximum input boxes allowed
+    var wrapper         = $(".input_fields_wrap"); //Fields wrapper
+    var add_button      = $(".add_field_button"); //Add button ID
+   
+    var x = 1; //initlal text box count
+
+	
+   $(add_button).click(function(e){ //on add input button click
+        e.preventDefault();
+        if(x < max_fields){ //max input box allowed
+	
+		     //text box increment
+            $(wrapper).append('<div class="form-group"><label for="input_stocks"><select class="selectpicker" name="input_portfolio" data-size="7" data-style="btn btn-primary btn-round" title="select" data-live-search="true">' +
+                                '<optgroup label = "Technology">' +
+                                '<option>AAPL	Apple, Inc.</option>' +
+                                '<option>MSFT	Microsoft Corp. </option>' +
+                                '<option>GOOG	Alphabet, Inc. </option>' +
+                                '<option>GOOGL	Alphabet, Inc. </option>' +
+                                '<option>AMZN	FB	Facebook, Inc. </option>' +
+                                '<option>INTC	Intel Corp. </option>' +
+                                '<option>VZ	Verizon Communications, Inc.</option>' +
+                                '<option>CSCO	Cisco Systems, Inc.</option>' +
+                                '<option>ADBE	Adobe, Inc.</option>' +
+                                '<option>PYPL	PayPal Holdings, Inc.</option>' +
+                                '<option>NVDA	NVIDIA Corp.</option>' +
+                                '<option>UTX	United Technologies Corp.</option>' +
+                                '<option>NFLX	Netflix, Inc.</option>' +
+                                '<option>IBM	International Business Machines Corp.' +
+                                '<option>ORCL	Oracle Corp.</option>' +
+                                '<option>TXN	Texas Instruments Incorporated</option>' +
+                                '<option>QCOM	QUALCOMM, Inc.</option>' +
+                                '</optgroup>' +
+
+                                '<optgroup label = "Financial">' +
+                                '<option>BRK.B	Berkshire Hathaway, Inc.</option>' +
+                                '<option>JPM	JPMorgan Chase & Co.</option>' +
+                                '<option>V	Visa, Inc.</option>' +
+                                '<option>MA	Mastercard, Inc. </option>' +
+                                '<option>WFC	Wells Fargo & Co.</option>' +
+                                '<option>C	Citigroup, Inc.</option>' +
+                                '<option>AMGN	Amgen, Inc.</option>' +
+                                '<option>ACN	Accenture Plc</option>' +
+                                '<option>LMT	Lockheed Martin Corp.</option>' +
+                                '<option>USB	U.S. Bancorp</option>' +
+                                '<option>GS	The Goldman Sachs Group, Inc.</option>' +
+                                '<option>MS	Morgan Stanley</option>' +
+                                '<option>ALL    Allstate</option>' +
+                                '<option>DOW    Dow Inc.</option>' +
+                                '<option>MET    MetLife Inc.</option>' +
+                                '<option>WBA    Walgreens Boots Alliance</option>' +
+                                '</optgroup>' +
+
+
+
+
+
+                                '<optgroup label = "Healthcare">' +
+                                '<option>JNJ	Johnson & Johnson </option>' +
+                                '<option>MRK	Merck & Co., Inc.</option>' +
+                                '<option>UNH	UnitedHealth Group, Inc.</option>' +
+                                '<option>PFE	Pfizer Inc.</option>' +
+                                '<option>ABT	Abbott Laboratories</option>' +
+                                '<option>MDT	Medtronic Plc</option>' +
+                                '<option>ABBV	AbbVie, Inc.</option>' +
+                                '<option>LLY	Eli Lilly & Co.</option>' +
+                                '<option>SPG	Simon Property Group, Inc.</option>' +
+                                '<option>DHR	Danaher Corp.</option>' +
+                                '<option>BMY	Bristol-Myers Squibb Co.</option>' +
+                                '<option>CVS	CVS Health Corp.</option>' +
+                                '<option>GILD	Gilead Sciences, Inc.' +
+                                '<option>CELG	Celgene Corp.</option>' +
+                                '<option>AGN    Allergan</option>' +
+                                '<option>BIIB   Biogen</option>' +
+                                '</optgroup>' +
+
+
+
+
+
+                                '<optgroup label = "Consumer Staple">' +
+                                '<option>WMT	Walmart, Inc. </option>' +
+                                '<option>PG	Procter & Gamble Co. </option>' +
+                                '<option>HD	The Home Depot, Inc.</option>' +
+                                '<option>COST	Costco Wholesale Corp.</option>' +
+                                '<option>PM	Philip Morris International, Inc.</option>' +
+                                '<option>MO	Altria Group, Inc.</option>' +
+                                '<option>MDLZ	Mondelez International, Inc.</option>' +
+                                '<option>CL     Colgate-Palmolive</option>' +
+                                '<option>F      Ford Motor Company</option>' +
+                                '<option>GM     General Motors</option>' +
+                                '<option>KHC    Kraft Heinz</option>' +
+                                '</optgroup>' +
+
+
+
+
+
+                                '<optgroup label = "Consumer Discretionary">' +
+                                '<option>SBUX	Starbucks Corp.</option>' +
+                                '<option>MCD	McDonald Corp.</option>' +
+                                '<option>KO	The Coca-Cola Co.</option>' +
+                                '<option>PEP	PepsiCo, Inc.</option>' +
+                                '<option>BKNG	Booking Holdings, Inc.</option>' +
+                                '<option>NKE	NIKE, Inc.</option>' +
+                                '<option>LOW	Lowe Cos., Inc.</option>' +
+                                '<option>TGT Target Corporation</option>' +
+                                '</optgroup>' +
+
+
+
+                                '<optgroup label = "Energy">' +
+                                '<option>XOM	Exxon Mobil Corp.</option>' +
+                                '<option>NEE	NextEra Energy, Inc.</option>' +
+                                '<option>GE	General Electric Co.</option>' +
+                                '<option>CVX	Chevron Corp.</option>' +
+                                '<option>DUK	Duke Energy Corp.</option>' +
+                                '<option>SO	The Southern Co.</option>' +
+                                '<option>COP	ConocoPhillips</option>' +
+                                '<option>EMR    Emerson Electric Co.</option>' +
+                                '<option>EXC    Exelon</option>' +
+                                '<option>KMI    Kinder Morgan</option>' +
+                                '<option>OXY    Occidental Petroleum Corp.</option>' +
+                                '<option>SLB    Schlumberger</option>' +
+
+
+
+
+
+                                '</optgroup>' +
+                                '<optgroup label = "Telcomm">' +
+                                '<option>T	AT&T, Inc.</option>' +
+                                '<option>CMCSA	Comcast Corp.</option>' +
+                                '<option>CHTR	Charter Communications, Inc.</option>' +
+                                '<option>DIS	The Walt Disney Co.</option>' +
+                                '</optgroup>' +
+
+                                '<optgroup label = "Industrial">' +
+                                '<option>BA	The Boeing Co. </option>' +
+                                '<option>HON	Honeywell International, Inc.</option>' +
+                                '<option>MMM	3M Co.</option>' +
+                                '<option>CAT	Caterpillar, Inc.</option>' +
+                                '<option>GD     General Dynamics</option>' +
+                                '<option>RTN    Raytheon Co..</option>' +
+                                '</optgroup> ' +
+
+
+
+                                '<optgroup label = "Transportation">' +
+                                '<option>UNP	Union Pacific Corp. </option>' +
+                                '<option>UPS	United Parcel Service, Inc.</option>' +
+                                '<option>AXP	American Express Co.</option>' +
+                                '<option>DD     DuPont de Nemours Inc</option>' +
+                                '<option>FDX    FedEx</option>' +
+                                '</optgroup></select>' +
+
+                                '<a href="#" class="remove_field"><i class="fa fa-times"></div>'
+                                );
+
+            $('.selectpicker').selectpicker('refresh');
+            x++; 
+	  }
+    });
+
+
+});
+	
+
+</script>
+    <body>
+        <form id = "survey-form" action="/portfolio/confirm_inputed_portfolio" method="post">
+             <div class="input_fields_wrap">
+                <button class="add_field_button">Add Stock</button>
+             </div>
+             <div class="mx-auto p-3" style="width: 600px;">
+                 <button type="submit" class="btn btn-primary">Submit</button>
+             </div>
+        </form>
+    </body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

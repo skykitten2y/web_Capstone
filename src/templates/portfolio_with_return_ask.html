@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+
+   <div class = "container">
+    <form id = "input_return_form" action="/portfoilo/with_return" method="post">
+       <div class="form-group">
+                         <label for="goal">What is your return goal? (in %)</label>
+                         <input type = "text" id="goal" class = "form-control" name="goal">
+                 </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    </div>>
+
+
+{% endblock %}
