@@ -3,13 +3,13 @@ import os
 import pymongo
 
 class Database(object):  #get general Database class as well as object you defined below
-    URI = os.environ.get("MONGOLAB_URI")
+    uri = os.environ.get("MONGOLAB_URI")
     DATABASE = None
     # with out initialize method, since all database need to access the same uri and database
 
     @staticmethod  #tell python we are not using self in this method
     def initialize():
-        db = pymongo.MongoClient(Database.URI) #access uri through Database class, that's why we called static
+        db = pymongo.MongoClient(Database.uri) #access uri through Database class, that's why we called static
         Database.DATABASE = db.get_default_database()
 
     @staticmethod
