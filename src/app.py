@@ -41,17 +41,17 @@ def login_user():
     elif User.address_valid(email, password):
         return render_template('login_wrong_password.html')
     else:
-        return render_template('register.html')
+        return render_template('choose_functionr.html')  #!!!
 
 
 @app.route('/auth/register', methods =['POST'])
 def register_user():
-    # email = request.form['email']
-    # password = request.form['password']
-    # if User.duplicate_register(email):
-    #     return render_template('register_duplicate_address.html')
-    # else:
-    #     User.register(email, password)
+    email = request.form['email']
+    password = request.form['password']
+    if User.duplicate_register(email):
+        return render_template('register_duplicate_address.html')
+    else:
+        User.register(email, password)
         return render_template("choose_function.html", email=session['email'])
 
 @app.route('/extract_existing_info', methods = ['POST'])
