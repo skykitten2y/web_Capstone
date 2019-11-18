@@ -1,5 +1,4 @@
-import uuid
-import datetime
+
 
 from src.common.database import Database
 
@@ -8,7 +7,7 @@ class Survey(object):
     # need to get num_assets, inv_time, reb_time, risk_measure,return_goal (starting from answer_q_13, the info before is only for storage purpose)
 
     def __init__(self, email, gender, age, employment, house, car, education,income, protect, name,num_asset,inv_time,
-                 reb_time, risk_measure, ret_goal=None, given_portfolio=None):  # set a default value for id to be none
+                 reb_time, risk_measure, ret_goal=None, given_portfolio=None, _id=None):  # set a default value for id to be none
         self.email = email
         self.gender = gender
         self.age = age

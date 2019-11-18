@@ -32,16 +32,14 @@ def initialize_database():
 @app.route('/auth/login', methods=['POST'])   #define a new end point to login user, get the email and passwords and log user in
 def login_user():
     email = request.form['email'] #website is going to make a request to form from login.htmal for email and password (from Id)
-
     password = request.form['password']
 
     if User.login_valid(email, password):
         User.login(email)
-        return render_template("choose_extract.html",email=session['email'])  # give a render_template with data you want, by variable email.
-    elif User.address_valid(email, password):
-        return render_template('login_wrong_password.html')
+        return render_template("choose_extract.html")  # give a render_template with data you want, by variable email.
     else:
-        return render_template('register.html')
+        return render_template('login_wrong_password.html')
+
 
 
 @app.route('/auth/register', methods =['POST'])

@@ -1,18 +1,14 @@
-import uuid
-import datetime
 
 from flask import session
-
 from src.common.database import Database
-from src.models import survey
-from src.models.survey import Survey
+
 
 
 class User(object):
     def __init__(self,email,password,_id=None):
         self.email = email
         self.password = password
-        self._id = uuid.uuid4().hex if _id is None else _id
+
 
     @classmethod  # A class method takes cls as first parameter while a static method needs no specific parameters
     def get_by_email(cls, email):
@@ -23,19 +19,19 @@ class User(object):
 
     @staticmethod
     def login_valid(email, password):
-        # check whether a user's email matches the password they sent us
+        # Check whether a user's email matches the password they sent us
         user = User.get_by_email(email)
         if user is not None:
-            # check the password
+            # Check the password
             return user.password == password
         return False
 
     @staticmethod
-    def address_valid(email,password):
+    def address_valid(email, password):
         # check if only address are correct, user input wrong email
         user = User.get_by_email(email)
         if user is None:
-            return False
+            return not user.password == password
         return True
 
     @staticmethod
@@ -76,11 +72,9 @@ class User(object):
 
 
 
-
     def json(self):
         return{
             "email": self.email,
-            "_id": self._id,
             "password": self.password  #this is not safe to send over the network
         }
 
