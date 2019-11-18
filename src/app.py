@@ -1,6 +1,5 @@
 
 from flask import Flask, render_template, request, session
-
 from src.common.database import Database
 from src.models.user import User
 from src.models.survey import Survey
@@ -10,6 +9,7 @@ from src.models.survey import Survey
 
 
 app = Flask(__name__) #'  main  '
+
 app.secret_key ="Leon19970309" #flask uses to make sure cookie is secure
 
 @app.route('/')
@@ -49,9 +49,7 @@ def register_user():
     if User.duplicate_register(email):
         return render_template('register_duplicate_address.html')
     else:
-        #User.register(email, password)
-        user_collection=Database.db.users
-        user_collection.insert({'email':email, 'password': password})
+        User.register(email, password)
         return render_template("choose_function.html", email=session['email'])
 
 @app.route('/extract_existing_info', methods = ['POST'])

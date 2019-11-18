@@ -1,6 +1,7 @@
 Flask==1.1.1
 pymongo==3.9.0
 jinja2 ==2.10.3
+flasker == 0.1.45
 uwsgi
 
 
