@@ -1,11 +1,11 @@
-import pandas
+
 from flask import Flask, render_template, request, session
 
 from src.common.database import Database
 from src.models.user import User
 from src.models.survey import Survey
 
-import pandas as pd
+
 
 
 

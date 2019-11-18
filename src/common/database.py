@@ -1,8 +1,9 @@
+import os
 
 import pymongo
 
 class Database(object):  #get general Database class as well as object you defined below
-    uri = "mongodb://127.0.0.1:27017"
+    uri = os.envron.get("MONGOLAB_URI")
     DATABASE = None
     # with out initialize method, since all database need to access the same uri and database
 

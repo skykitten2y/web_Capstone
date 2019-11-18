@@ -30,13 +30,13 @@
     <property name="settings.editor.selected.configurable" value="vcs.Git" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\yangy\PycharmProjects\web_Capstone\src\templates" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\yangy\PycharmProjects\web_Capstone" />
       <recent name="C:\Users\yangy\PycharmProjects\web_Capstone\src" />
       <recent name="C:\Users\yangy\PycharmProjects\web_Capstone\src\models" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\yangy\PycharmProjects\web_Capstone\src\templates" />
     </key>
   </component>
   <component name="RunDashboard">
