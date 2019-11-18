@@ -79,7 +79,7 @@ class User(object):
         }
 
     def save_to_mongo(self):
-        Database.insertOne("users", self.json())
+        Database.insert("users", self.json())
 
     @staticmethod
     def find_risklevel( answer_q1, answer_q2, answer_q3,answer_q4,answer_q5,answer_q6,answer_q7,answer_q8):
