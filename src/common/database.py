@@ -11,7 +11,7 @@ class Database(object):  #get general Database class as well as object you defin
     @staticmethod  #tell python we are not using self in this method
     def initialize():
         db = pymongo.MongoClient(Database.uri) #access uri through Database class, that's why we called static
-        Database.DATABASE = db['heroku_90spfz55']
+        Database.DATABASE = db.get_default_database()
 
     @staticmethod
     def insert(collection,data):
