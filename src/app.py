@@ -44,8 +44,6 @@ def login_user():
         return render_template('register.html')
 
 
-    ##add users' email to a session and store in variable email
-
 @app.route('/auth/register', methods =['POST'])
 def register_user():
     email = request.form['email']
