@@ -49,7 +49,9 @@ def register_user():
     if User.duplicate_register(email):
         return render_template('register_duplicate_address.html')
     else:
-        User.register(email, password)
+        #User.register(email, password)
+        user_collection=Database.db.users
+        user_collection.insert({'email':email, 'password': password})
         return render_template("choose_function.html", email=session['email'])
 
 @app.route('/extract_existing_info', methods = ['POST'])
