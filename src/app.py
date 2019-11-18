@@ -11,7 +11,7 @@ from src.models.survey import Survey
 
 app = Flask(__name__) #'  main  '
 app.secret_key ="Leon19970309" #flask uses to make sure cookie is secure
-
+Database.init_app(app)
 @app.route('/')
 def home_template():
     return render_template('home.html')
@@ -188,6 +188,7 @@ def results():
     return render_template("charts_demo.html",weight = weight, stock = stock)
 
 if __name__ == '__main__': #execute
+
     app.run(port=5000, debug=True) # need this to update
 
 
