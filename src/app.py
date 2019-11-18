@@ -41,7 +41,7 @@ def login_user():
     elif User.address_valid(email, password):
         return render_template('login_wrong_password.html')
     else:
-        return render_template('choose_functionr.html')  #!!!
+        return render_template('choose_function.html')  #!!!
 
 
 @app.route('/auth/register', methods =['POST'])
