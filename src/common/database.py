@@ -3,14 +3,14 @@ import os
 import pymongo
 
 class Database(object):  #get general Database class as well as object you defined below
-    uri = os.environ.get("MONGOLAB_URI")
+    URI = os.environ.get("MONGOLAB_URI")
     DATABASE = None
     # with out initialize method, since all database need to access the same uri and database
 
     @staticmethod  #tell python we are not using self in this method
     def initialize():
-        db = pymongo.MongoClient(Database.uri) #access uri through Database class, that's why we called static
-        Database.DATABASE = db['heroku_90spfz55']
+        db = pymongo.MongoClient(Database.URI) #access uri through Database class, that's why we called static
+        Database.DATABASE = db.get_default_database()
 
     @staticmethod
     def insert(collection,data):
