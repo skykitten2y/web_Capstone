@@ -3,7 +3,7 @@ import os
 import pymongo
 
 class Database(object):  #get general Database class as well as object you defined below
-    uri = os.envron.get("MONGOLAB_URI")
+    uri = os.environ.get("MONGOLAB_URI")
     DATABASE = None
     # with out initialize method, since all database need to access the same uri and database
 
