@@ -135,7 +135,7 @@ def confirm_survey():
 @app.route('/portfolio', methods=['POST'])
 def portfolio_options():
     if (session.get('answer_q16', None) == "Get the risk and return profile for given portfolio"):
-        return render_template("given_portfolio_ask.html")
+        return render_template("test.html") #given_portfolio_ask
     elif (session.get('answer_q16', None) == "Get the optimal portfolio without return"):
         return render_template("portfolio_without_return.html")
     elif (session.get('answer_q16', None) == "Get the optimal portfolio with return"):
