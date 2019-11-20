@@ -1,3 +1,5 @@
+//= require jquery
+
 $(document).ready(function(){
     var next = 1;
     $(".add-more").click(function(e){
