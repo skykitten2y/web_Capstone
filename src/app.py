@@ -147,7 +147,7 @@ def portfolio_options():
 def existing_portfolio_options():
     e_answer_q16 = request.form.get('e_q16')
     if (e_answer_q16 == "Get the risk and return profile for given portfolio"):
-        return render_template("test.html") #given_portfolio_ask.thml
+        return render_template("given_portfolio_ask.html") #given_portfolio_ask.thml
     elif (e_answer_q16 == "Get the optimal portfolio without return"):
         return render_template("portfolio_without_return.html")
     elif (e_answer_q16 == "Get the optimal portfolio with return"):
