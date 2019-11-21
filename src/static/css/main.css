@@ -1,9 +1,5 @@
-.entry:not(:first-of-type)
-{
-    margin-top: 10px;
-}
-
-.glyphicon
-{
-    font-size: 12px;
+h1{
+    font-size: 45px;
+    background-color: red;
+    margin: 50px auto;
 }
