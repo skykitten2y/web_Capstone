@@ -51,7 +51,7 @@ p{
 }
 
 #headingb h1 span{
-    color: #666666;
+    color: #2e5cb8;
     font-weight: 500;
 }
 
@@ -74,10 +74,26 @@ p{
 }
 
 
-#add-stock-content{
-    horizontal-align:middle;
+#add-stock-button{
+    text-align: center;
     display: table-cell;
 }
+
+#add-stock-content{
+    text-align: center;
+    display: table-cell;
+}
+
+#add-stock-2{
+    text-align: center;
+    display: table-cell;
+}
+
+#add-stock-submit{
+    text-align: center;
+    display: table-cell;
+}
+
 
 #home-content{
     width: 100%;

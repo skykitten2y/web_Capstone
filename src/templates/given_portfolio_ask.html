@@ -209,11 +209,12 @@
     <body>
 
     <div id="add-stock-form">
-        <form id = "add-stock-content" action="/portfolio/confirm_inputed_portfolio" method="post">
-             <div class="input_fields_wrap">
+        <div class="input_fields_wrap">
                 <button class="add_field_button">Add Stock</button>
-             </div>
-             <div class="mx-auto p-3" style="width: 600px;">
+        </div>
+
+        <form id = "add-stock-content" action="/portfolio/confirm_inputed_portfolio" method="post">
+             <div id = "add-stock-submit" class="mx-auto p-3" style="width: 600px;">
                  <button type="submit" class="btn btn-primary">Submit</button>
              </div>
         </form>
