@@ -4,7 +4,7 @@ html, body {
 body{
     height: 100%;
     color: #212226;
-    background:#f6f6ee
+    background: white;
 }
 h1,
 h2,
@@ -70,4 +70,14 @@ section{
 
 }
 
-            <div id="heading-buttom">
+#add-stock-form{
+    width: 100%;
+    height: 100%;
+    display: table;
+}
+
+
+#add-stock-content{
+    vertical-align:middle;
+    display: table-cell;
+}
