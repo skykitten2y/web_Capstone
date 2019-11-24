@@ -1,9 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
-        <div class="mx-auto p-3" style="width: 600px;">
-            <h4>Hello {{email}}, </h4>
-            <p><small> We are going to ask you some questions</small></p>
-        </div>
+
     <form id = "survey-form" action="/survey/confirm" method="post">
         <div class="mx-auto p-3" style="width: 600px;">
              <div class="form-group">
