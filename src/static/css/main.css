@@ -4,7 +4,7 @@ html, body {
 body{
     height: 100%;
     color: #212226;
-    background: white;
+    background: #e6e6e6;
 }
 h1,
 h2,
@@ -51,7 +51,7 @@ p{
 }
 
 #headingb h1 span{
-    color: #f4c613;
+    color: #666666;
     font-weight: 500;
 }
 
