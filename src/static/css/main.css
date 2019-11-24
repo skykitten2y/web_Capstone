@@ -4,7 +4,7 @@ html, body {
 body{
     height: 100%;
     color: #212226;
-    background: #e6e6e6;
+    background: white;
 }
 h1,
 h2,
@@ -74,7 +74,7 @@ p{
 }
 
 
-#add-stock-button{
+#add-stock-form{
     text-align: center;
     display: table-cell;
 }
@@ -82,17 +82,10 @@ p{
 #add-stock-content{
     text-align: center;
     display: table-cell;
+    overFlow:hidden;
 }
 
-#add-stock-2{
-    text-align: center;
-    display: table-cell;
-}
 
-#add-stock-submit{
-    text-align: center;
-    display: table-cell;
-}
 
 
 #home-content{
