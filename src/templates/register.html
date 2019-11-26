@@ -1,19 +1,51 @@
-{% extends "base.html" %}
-{% block content %}
-    &nbsp;
-    <div>Registration</div>
-    <div class = "container page-form">
-    <form id = "login-form" action="/auth/register" method="post">
+<!DOCTYPE html >
+<html lang="en">
+<head>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
 
-         <div class="form-group">
-             <label for="email">Email</label>
-             <input type = "text" id="email" class = "form-control" name="email">
-         </div>
-         <div class="form-group">
-             <label for="password">Password</label>
-             <input type = "text" id="password" class = "form-control" name="password">
-         </div>>
-        <button type="submit" class="btn btn-primary">Sign up</button>
-    </form>
-    </div>
-{% endblock %}
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
+</head>
+
+
+<body>
+
+
+            <form id = "login-form" action="/auth/register" method="post">
+<div class="container">
+<br>
+<hr>
+<div class="row">
+	<aside class="col-sm-4 order-12">
+
+<div class="card ">
+<article class="card-body">
+<h4 class="card-title mb-4 mt-1">Register</h4>
+	 <form>
+    <div class="form-group">
+    	<label>Your email</label>
+        <input type = "text" id="email" class = "form-control" name="email">
+    </div> <!-- form-group// -->
+    <div class="form-group">
+    	<label>Your password</label>
+        <input type = "text" id="password" class = "form-control" name="password">
+    </div> <!-- form-group// -->
+    <div class="form-group">
+    </div> <!-- form-group// -->
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary btn-block"> Register  </button>
+    </div> <!-- form-group// -->
+</form>
+</article>
+</div> <!-- card.// -->
+
+	</aside> <!-- col.// -->
+	<aside class="col-sm-4">
+    </aside>
+</div>
+</div>
+</form>
+    </body>
+</html>

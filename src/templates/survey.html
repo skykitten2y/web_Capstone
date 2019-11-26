@@ -1,24 +1,39 @@
-{% extends "base.html" %}
-{% block content %}
+<!DOCTYPE html >
+<html lang="en">
+<head>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
+
+</head>
+
+
+
+
+<body>
+
 
     <form id = "survey-form" action="/survey/confirm" method="post">
         <div class="mx-auto p-3" style="width: 600px;">
-             <div class="form-group">
+             <div class="form-group h4 font-weight-normal">
                  <label for="name">Q1: What is your legal name?</label>
                  <input type = "text" id="name" class = "form-control" name="name">
              </div>
 
-                <div class="form-group">
+                <div class="form-group h4">
                          <label for="assets">Q2: What is your expected number of assets in portfolio? (Max 1000)</label>
                          <input type = "text" id="assets" class = "form-control" name="assets">
                  </div>
 
-                <div class="form-group">
+                <div class="form-group h4">
                          <label for="horizon">Q3: What is your expected investment time horizon? (in years)</label>
                          <input type = "text" id="horizon" class = "form-control" name="horizon">
                  </div>
 
-                <div class="form-group">
+                <div class="form-group h4">
                          <label for="rebalance">Q4: What is your expected rebalancing period?</label>
                          <input type = "text" id="rebalance" class = "form-control" name="rebalance">
                  </div>
@@ -196,9 +211,9 @@
 
     </form>
 
+</body>
+</html>
 
 
 
 
-
-{% endblock %}

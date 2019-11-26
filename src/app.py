@@ -19,7 +19,7 @@ def home_template():
 
 @app.route('/login')  #127.0.0.1:5000/login  define route
 def login_template(): # defined the method, access the end point
-    return render_template('test.html')
+    return render_template('login.html')
 
 @app.route('/register')  #127.0.0.1:5000/register
 def register_template():
