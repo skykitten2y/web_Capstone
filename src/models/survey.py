@@ -38,6 +38,8 @@ class Survey(object):
                         data=self.json())
         pass
 
+    def replace_data(self,collection,search):
+        Database.DATABASE[collection].replace_one(search,replacement=self.json())
 
 
     @classmethod

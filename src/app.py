@@ -125,8 +125,7 @@ def confirm_survey():
 
     #need to get num_assets, inv_time, reb_time, risk_measure,return goal (starting from answer_q_13, the userf info beforehand is only for storage purpose)
     if(Database.find_one("surveys", {"email":session.get('email',None)})):
-        Database.replace_data('surveys', {"email": session.get('email', None)}, new_survey)
-
+        Survey.replace_data('surveys', {"email": session.get('email', None)}, new_survey)
     else:
         Survey.save_to_mongo(new_survey)
 
