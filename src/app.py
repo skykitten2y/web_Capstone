@@ -124,10 +124,11 @@ def confirm_survey():
                         answer_q8,answer_q9, answer_q13, answer_q14,answer_q15, rw)
 
     #need to get num_assets, inv_time, reb_time, risk_measure,return goal (starting from answer_q_13, the userf info beforehand is only for storage purpose)
-    if(Database.find_one("surveys", {"email":session.get('email',None)}) == ""):
-        Survey.save_to_mongo(new_survey)
+    if(Database.find_one("surveys", {"email":session.get('email',None)})):
+        Database.replace_data('surveys', {"email": session.get('email', None)}, new_survey)
+
     else:
-        Database.replace_data('surveys',{"email":session.get('email',None)}, new_survey)
+        Survey.save_to_mongo(new_survey)
 
 
     return render_template("survey_results.html", answer_q1=answer_q1, answer_q2=answer_q2, answer_q3=answer_q3,
