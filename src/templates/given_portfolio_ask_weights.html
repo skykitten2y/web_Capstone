@@ -22,29 +22,32 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <script src="tail.select-full.min.js"></script>
     <script>
-        tail.select('#select1',{
-            search: true
-        });
 
     </script>
 
 
 <body>
 
-    &nbsp;
-   <div class = "container ">
-    <form id = "input_return_form" action="/portfoilo/with_return" method="post">
-    <div class="card w-75 mx-auto">
-      <div class="card-body ">
-        <h2 class="card-title">Return Goal</h2>
-        <p class="card-text">Give us what you expect to earn (in %), we would choose the assets and tell you how many of them to buy</p>
-          <input type = "text" id="goal" class = "form-control" name="goal">
+<form id = "confirm-form" action="/portfolio/input_portfolio_confirm" method="post">
+    <div class="mx-auto p-3" style="width: 600px;">
+
+
+        <h2>Your portfolio is:</h2>
+        <ul style="list-style-type:none;">
+             {{input_portfolio}}
+        </ul>
+        <h2 class="card-title">Input Weights</h2>
+        <p class="card-text">Input the weights in the format as example "0.2,0.3,0.5" for three stocks. Note: do not add space in between</p>
+          <input type = "text" id="input_weight" class = "form-control" name="input_weight">
+
         <button type="submit" class="btn btn-primary">Submit</button>
-      </div>
-    </div>
-    </form>
     </div>
 
 
+
+
+
+
+</form>
 </body>
 </html>

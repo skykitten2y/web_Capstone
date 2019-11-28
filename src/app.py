@@ -176,17 +176,36 @@ def investor_input_portfolio():
     return render_template("portfolio_without_return_results.html")
 
 
-@app.route('/portfolio/confirm_inputed_portfolio',methods=['POST'])
-def confirm_input_portfolio():
+@app.route('/portfolio/input_weight_portfolio',methods=['POST'])
+def input_weight_portfolio():
     input_portfolio = request.form.getlist('input_portfolio')
-    return render_template("given_portfolio_results.html", input_portfolio = input_portfolio)
-@app.route('/')
-# @app.route('/portfolio/results', methods = ['POST]'])
+    session['input_portfolio'] = request.form.getlist('input_portfolio')
+    return render_template("given_portfolio_ask_weights.html", input_portfolio = input_portfolio)
+
+# add
+@app.route('/portfolio/input_portfolio_confirm',methods=['POST'])
+def input_confirm_portfolio():
+    input_weight = request.form.get('input_weight')
+    input_weight = input_weight.split(",")
+    input_portfolio = session.get('input_portfolio',None)
+
+    temp= 0
+    given_portfolio = {}
+    for i in input_portfolio:
+        given_portfolio[i]= float(input_weight[temp])
+        temp = temp + 1
+
+
+    return render_template("given_portfolio_results.html", input_portfolio = session.get('input_portfolio',None),input_weight=input_weight,given_portfolio=given_portfolio)
+
+
+
+#add
+
+@app.route('/given_portfolio/results', methods=['GET', 'POST'])
 def results():
     stock = ['AAPL','MSFT','GOOG','GOOGL','AMZN']
     weight = [0.5,0.2,0.1,0,0.1]
-
-
     return render_template("charts_demo.html",weight = weight, stock = stock)
 
 if __name__ == '__main__': #execute
