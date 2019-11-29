@@ -179,6 +179,7 @@ def investor_input_portfolio():
 @app.route('/portfolio/input_weight_portfolio',methods=['POST'])
 def input_weight_portfolio():
     input_portfolio = request.form.getlist('input_portfolio')
+
     session['input_portfolio'] = request.form.getlist('input_portfolio')
     return render_template("given_portfolio_ask_weights.html", input_portfolio = input_portfolio)
 
@@ -188,6 +189,12 @@ def input_confirm_portfolio():
     input_weight = request.form.get('input_weight')
     input_weight = input_weight.split(",")
     input_portfolio = session.get('input_portfolio',None)
+
+    input_backtest_period = request.form.get('input_backtest_period')
+    if (input_backtest_period == ""):
+        input_backtest_period = 10
+    session['input_backtest_period'] = input_backtest_period
+
 
     temp= 0
     given_portfolio = {}
