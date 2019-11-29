@@ -34,7 +34,9 @@
 
         <h2>Your portfolio is:</h2>
         <ul style="list-style-type:none;">
-             {{input_portfolio}}
+            {% for item in input_portfolio %}
+             {{item}},
+            {% endfor %}
         </ul>
         <h2 class="card-title">Input Weights</h2>
         <p class="card-text">Input the weights in the format as example "0.2,0.3,0.5" for three stocks. Note: do not add space in between</p>

@@ -195,7 +195,6 @@ def input_confirm_portfolio():
         given_portfolio[i]= float(input_weight[temp])
         temp = temp + 1
 
-
     return render_template("given_portfolio_results.html", input_portfolio = session.get('input_portfolio',None),input_weight=input_weight,given_portfolio=given_portfolio)
 
 
@@ -206,7 +205,8 @@ def input_confirm_portfolio():
 def results():
     stock = ['AAPL','MSFT','GOOG','GOOGL','AMZN']
     weight = [0.5,0.2,0.1,0,0.1]
-    return render_template("charts_demo.html",weight = weight, stock = stock)
+    sr = "abc"
+    return render_template("charts_demo.html",weight = weight, stock = stock, sr = sr)
 
 if __name__ == '__main__': #execute
 
