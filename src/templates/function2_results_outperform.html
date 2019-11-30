@@ -105,12 +105,12 @@
             labels: [1500,1600,1700,1750,1800,1850,1900,1950,1999,2050],
             datasets: [{
                 data: [86,114,106,106,107,111,133,221,783,2478],
-                label: "Africa",
+                label: "Portfolio Value",
                 borderColor: "#3e95cd",
                 fill: false
               }, {
                 data: [282,350,411,502,635,809,947,1402,3700,5267],
-                label: "Asia",
+                label: "S&P500",
                 borderColor: "#8e5ea2",
                 fill: false
               },
@@ -119,7 +119,7 @@
           options: {
             title: {
               display: true,
-              text: 'World population per region (in millions)'
+              text: 'Portfolio Value'
             }
           }
         });
@@ -138,27 +138,29 @@
                     <div class="col-md-4">
                         <div class=" 'about-item text-center">
                             <i class="fa fa-rocket"></i>
-                            <h3>Existing Portfolio</h3>
+                            <h3>Portfolio Weights</h3>
                             <hr>
-                            <p>The user would provide desired stocks and related weights. The first function would provide return and risk profile of a given portfolio. In order to achieve this function, Fama-French 5 factors model is used to back test the past stock price to determine the expected rate of return and volatility.</p>
+                            <p>The portfolio weights are shown in the pie chart. You can move your mouse on the specific section to see the related numbers of the weights.</p>
                         </div>
                     </div>
 
                     <div class="col-md-4">
                         <div class=" 'about-item text-center">
                             <i class="fa fa-rocket"></i>
-                            <h3>Without Target Return</h3>
+                            <h3>Testing Value with Past Performance</h3>
                             <hr>
-                            <p> The second function of Robo-Advisor is to provide an optimal portfolio without any given goals.  Mean-Variance Optimization is implemented under Multi Period Framework to provide the optimal portfolio which will span the user’s entire investment horizon with given rebalancing period.  As MultiPeriod Framework allows us to take the future stock returns into account so that we could provide a better portfolio.  Thus, future stock returns and volatilities will be computed by GARCH in order to implement this model.</p>
+                            <p> If you have invested with our portfolio {{inv_time}} years ago, you would achieve the result as shown in the line chart above. Since no target return has been set, the portfolio is built based on the optimal reward vs. risk ratio.
+</p>
                         </div>
                     </div>
 
                     <div class="col-md-4">
                         <div class=" 'about-item text-center">
                             <i class="fa fa-rocket"></i>
-                            <h3>With Target Return</h3>
+                            <h3>Portfolio's Sharpe Ratio vs. SP500's Sharpe Ratio</h3>
+
                             <hr>
-                            <p>The  third  function  is  to  provide  an  optimal  portfolio  with  given  return  goal.  The  same processes are used as the second function.</p>
+                            <p>Portfolio's Sharpe Ratio for {{inv_time}} years as {{sr}} clearly outperform SP500's Sharpe Ratio for {{time}} years as {{sp500_sr_input}}, proving that our portfolio is better than the average investors in the market.</p>
                         </div>
                     </div>
 
