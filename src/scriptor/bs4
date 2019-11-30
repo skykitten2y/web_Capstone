@@ -1,11 +1,12 @@
 from bs4 import BeautifulSoup
 import urllib2
 import random
+from models.factor_data import factor_data
 import urllib
 import os
-from urllib2 import urlopen
 import zipfile2
-import pandas as pd
+
+
 url = "https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/ftp/F-F_Research_Data_5_Factors_2x3_TXT.zip"
 filename = os.path.basename(url)
 urllib.urlretrieve(url, filename)
@@ -20,7 +21,7 @@ f = open(txt_path, "r")
 lines = f.readlines()
 lines = [x.split() for x in lines]
 cleaned_lines=lines[4:679]
-print(cleaned_lines[560])
+# print(cleaned_lines[560])
 half_year=[0]*20
 for i in range(0,20):
      half_year[i]=cleaned_lines[560+6*i]
@@ -39,4 +40,10 @@ for line in half_year:
      factors['HML'].append(float(line[3])/100)
      factors['RMW'].append(float(line[4])/100)
      factors['CMA'].append(float(line[5])/100)
-print(factors)
+# print(factors)
+z='sfa'
+w='MKT'
+new_factor = factor_data(w,z)
+print(type(new_factor.b))
+
+# factor_data.save_to_mongo(new_factor)

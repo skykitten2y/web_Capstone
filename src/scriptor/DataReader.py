@@ -55,5 +55,3 @@ def DataReader(ticker, d_start, d_end):
     new_price = price_data(a,b)
     price_data.save_to_mongo(new_price)
 
-    new_factor = factor_data(a,b)
-    fator_data.save_to_mongo(new_factor)
