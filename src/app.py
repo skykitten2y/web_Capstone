@@ -14,10 +14,6 @@ app.secret_key ="Leon19970309" #flask uses to make sure cookie is secure
 
 @app.route('/')
 def home_template():
-    z = 'a'
-    w = 'b'
-    new_factor = factor_data(w, z)
-    factor_data.save_to_mongo(new_factor)
 
     return render_template('home.html')
 
