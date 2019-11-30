@@ -15,8 +15,8 @@ class price_data(object):
 
     def json(self):  # create a json representation of the survey
         return {
-            'a': self.a,
-            'b': self.b,
+            'ticker': self.a,
+            'Prices': self.b,
 
         }
 

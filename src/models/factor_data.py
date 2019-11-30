@@ -15,7 +15,7 @@ class factor_data(object):
 
     def json(self):  # create a json representation of the survey
         return {
-            'a': self.a,
-            'b': self.b,
+            'Factor_Name': self.a,
+            'Values': self.b,
 
         }
