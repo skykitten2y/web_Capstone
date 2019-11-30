@@ -1,14 +1,14 @@
 from src.common.database import Database
 
 
-class factor_data(object):
+class price_data(object):
 
     def __init__(self, a, b):  # set a default value for id to be none
         self.a = a
         self.b = b
 
     def save_to_mongo(self):
-        Database.insert(collection='factors',
+        Database.insert(collection='prices',
                         data=self.json())
         pass
 
@@ -19,3 +19,4 @@ class factor_data(object):
             'b': self.b,
 
         }
+

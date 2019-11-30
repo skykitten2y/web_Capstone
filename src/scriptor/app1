@@ -2,23 +2,27 @@ import requests
 import json
 import tiingo
 import math
+from src.common.database import Database
 from DataReader import DataReader
-tickers=["AAPL",'MSFT','GOOGL','AMZN','BERK','JPM','JNJ','WMT','V','PG','XOM','BAC','MA',
-         'T','HD','INTC','VZ','DIS','UNH','KO','CVX','WFC','MRK','CMCSA','PFE','CSCO','BA','PEP',
-         'ORCL','C','MCD','ABT','NKE','MDT','ADBE','COST','PM','NVDA','UTX','HON','AMGN','NFLX',
-         'IBM','UNP','TMO','CRM','ACN','NEE','AVGO','TXN','LLY','LOW','LMT','SPG','SBUX',
-         'UPS','DHR','QCOM','AXP','AMT','MMM','BMY','USB','MO','BKNG','LOW','CVS','GILD','FIS','SYK',
-         'CAT','GE','GS','MDLZ','MS','CELG','CME','TJX','BLK','ADP','TMUS','DUK','EL','CB','D','INTU',
-         'ANTM','BDX','CI','PNC','SO','ISRG','COP','SPGI']
+tickers=['AAPL','MSFT','GOOGL','AMZN','BERK','JPM','JNJ','WMT','V','PG',
+         'XOM','BAC','MA','T','HD','INTC','VZ','DIS','UNH','KO',
+         'CVX','WFC','MRK','CMCSA','PFE','CSCO','BA','PEP','ORCL','C',
+         'MCD','ABT','NKE','MDT','ADBE','COST','PM','NVDA','UTX','HON',
+         'AMGN','NFLX','IBM','UNP','TMO','CRM','ACN','NEE','AVGO','TXN',
+         'LLY','RTN','LMT','SPG','SBUX','UPS','DHR','QCOM','AXP','AMT',
+         'MMM','BMY','USB','MO','BKNG','LOW','CVS','GILD','FIS','SYK',
+         'CAT','GE','GS','MDLZ','MS','CELG','CME','TJX','BLK','ADP',
+         'TMUS','DUK','EL','CB','D','INTU','ANTM','BDX','CI','PNC',
+         'SO','ISRG','COP','SPGI','CL','CCI','PLD','AGN','BSX','CSX']
 two_dates=['-09-27','-03-29']
 stock_prices={}
-for i in range(0,94):
+for i in range(0,100):
     stock_prices[tickers[i]]=[]
 # for i in range(0,100):
 #      print(i)
 #      print(tickers[i])
 #      prices=DataReader(tickers[i],'2018-09-18','2018-09-22')
-#      print(prices[0][u'adjClose'])
+#      print(prices[0][u'adjClose']df
 print(tickers[2])
 print(tickers[5])
 print(tickers[39])
@@ -28,8 +32,8 @@ print(len(tickers))
 for j in range(0,1):
     for i in range(0,21):
         w=i%2
-        dates=str(int(2019-math.floor(i/2)))+two_dates[w]
-        # print(dates)
+        dates=str(int(2009+math.floor((i+1)/2)))+two_dates[w]
+        print(dates)
         if dates=='2015-09-27':
             dates='2015-09-28'
         if dates=='2015-03-29':
@@ -44,10 +48,14 @@ for j in range(0,1):
             dates = '2009-09-29'
         prices=DataReader(tickers[j],dates,dates)
         stock_prices[tickers[j]].append(prices[0][u'adjClose'])
-        # print(prices[0][u'adjClose'])
+        print(prices[0])
+
 
 print(stock_prices)
-
+# json_prices=json.dumps(stock_prices)
+# print(json_prices)
+# Database.insert("prices",json_prices)
+# mongoimport -h ds012345.mlab.com:56789 -d dbname -c collectionname -u dbuser -p dbpassword --file filename.json
 # for i in range(0,21):
 #     w=i%2
 #     dates=str(int(2019-math.floor(i/2)))+two_dates[w]
