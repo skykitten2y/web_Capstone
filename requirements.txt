@@ -3,5 +3,10 @@ pymongo==3.9.0
 jinja2 ==2.10.3
 flasker == 0.1.45
 uwsgi
+arch == 4.11
+statsmodels == 0.10.2
+numpy == 1.17.4
+cvxpy == 1.0.25
+pandas == 0.25.3
 
 
