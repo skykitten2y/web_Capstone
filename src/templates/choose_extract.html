@@ -1,16 +1,48 @@
+<!DOCTYPE html >
+<html lang="en">
+<head>
+    <!--    meta tags-->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale-1">
+    <title>Robo Advisor</title>
+    <link rel= "stylesheet"  href= "{{ url_for('static',filename='css/main.css') }}"/>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="tail.select-bootstrap4.css" rel="stylesheet"/>
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 
-{% block content %}
+    <!--    title-->
+    <title>Robo Advisor</title>
+    <!--    Custom CSS-->
+    <link rel="stylesheet" href="../static/css/main.css">
 
+</head>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.15.0/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="tail.select-full.min.js"></script>
+    <script>
+        tail.select('#select1',{
+            search: true
+        });
+
+    </script>
+
+
+<body>
+
+&nbsp;
 <form id = "survey-form" action="/extract_existing_info" method="post">
         <div class="mx-auto p-3" style="width: 600px;">
-            <h4> Would you like to use your existing info? </h4>
+            <h2 > Would you like to use your existing information? </h2>
            <div class="form-check form-check-inline">
               <input class="form-check-input" type="radio" name="q17" id="q17_1" value="Yes">
-              <label class="form-check-label" for="q17_1">Yes</label>
+              <label class="form-check-label h4" for="q17_1" >Yes</label>
             </div>
             <div class="form-check form-check-inline">
               <input class="form-check-input" type="radio" name="q17" id="q17_2" value="No">
-              <label class="form-check-label" for="q17_2">No</label>
+              <label class="form-check-label h4" for="q17_2">No</label>
             </div>
         </div>
 
@@ -19,4 +51,7 @@
             <button type="submit" class="btn btn-primary">Submit</button>
         </div>
 </form>
-{% endblock %}
+
+
+</body>
+</html>

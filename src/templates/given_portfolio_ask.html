@@ -2,6 +2,8 @@
     <head>
         <title>Add/Remove Input Fields Dynamically with jQuery</title>
 
+    <!--    Custom CSS-->
+    <link rel="stylesheet" href="../static/css/main.css">
 
     </head>
 
@@ -11,8 +13,24 @@
     <script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.9.3/js/bootstrap-select.min.js"></script>
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+    <!-- Bootstrap JS -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
+
+    <!-- Bootstrap-Select CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css" rel="stylesheet"/>
+
+    <!-- Bootstrap-Select JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
+
+
 
 	<script>
+
     $(document).ready(function() {
       $('.selectpicker').selectpicker({
         style: 'btn-info',
@@ -24,7 +42,7 @@
     var wrapper         = $(".input_fields_wrap"); //Fields wrapper
     var add_button      = $(".add_field_button"); //Add button ID
    
-    var x = 1; //initlal text box count
+    var x = 1; //text box count
 
 	
    $(add_button).click(function(e){ //on add input button click
@@ -94,9 +112,6 @@
                                 '<option>AGN    Allergan</option>' +
                                 '<option>BIIB   Biogen</option>' +
                                 '</optgroup>' +
-
-
-
 
 
                                 '<optgroup label = "Consumer Staple">' +
@@ -187,16 +202,21 @@
 });
 	
 
+
+
 </script>
     <body>
-        <form id = "survey-form" action="/portfolio/confirm_inputed_portfolio" method="post">
+    <h2 class="text-center">Please add the candidate stocks for the portfolio </h2>
+    &nbsp;
+    <div class="text-center" id="add-stock-form">
+        <form id = "add-stock-content" action="/portfolio/input_weight_portfolio" method="post">
              <div class="input_fields_wrap">
-                <button class="add_field_button">Add Stock</button>
+                <button class="add_field_button btn btn-primary">Add Stock</button>
              </div>
-             <div class="mx-auto p-3" style="width: 600px;">
-                 <button type="submit" class="btn btn-primary">Submit</button>
-             </div>
+             <button type="submit" class="btn btn-primary">Submit</button>
+
         </form>
+    </div>
     </body>
 </html>
 

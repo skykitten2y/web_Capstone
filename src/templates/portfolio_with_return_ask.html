@@ -1,15 +1,50 @@
-{% extends "base.html" %}
-{% block content %}
+<!DOCTYPE html >
+<html lang="en">
+<head>
+    <!--    meta tags-->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale-1">
+    <title>Robo Advisor</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="tail.select-bootstrap4.css" rel="stylesheet"/>
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 
-   <div class = "container">
+    <!--    title-->
+    <title>Robo Advisor</title>
+    <!--    Custom CSS-->
+    <link rel="stylesheet" href="../static/css/main.css">
+
+</head>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.15.0/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="tail.select-full.min.js"></script>
+    <script>
+        tail.select('#select1',{
+            search: true
+        });
+
+    </script>
+
+
+<body>
+
+    &nbsp;
+   <div class = "container ">
     <form id = "input_return_form" action="/portfoilo/with_return" method="post">
-       <div class="form-group">
-                         <label for="goal">What is your return goal? (in %)</label>
-                         <input type = "text" id="goal" class = "form-control" name="goal">
-                 </div>
+    <div class="card w-75 mx-auto">
+      <div class="card-body ">
+        <h2 class="card-title">Return Goal</h2>
+        <p class="card-text">Give us what you expect to earn (in %), we would choose the assets and tell you how many of them to buy</p>
+          <input type = "text" id="goal" class = "form-control" name="goal">
         <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+    </div>
     </form>
-    </div>>
+    </div>
 
 
-{% endblock %}
+</body>
+</html>

@@ -40,6 +40,7 @@ class Survey(object):
 
 
 
+
     @classmethod
 
     def get_by_email(cls,email):
