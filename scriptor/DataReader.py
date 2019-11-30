@@ -1,5 +1,9 @@
 import requests
+
+
+
 import pandas as pd
+
 
 yourtoken = 'b58b68b9f156fae188bb48f29c156f7e50714d54'
 
@@ -44,3 +48,12 @@ def DataReader(ticker, d_start, d_end):
     # a = df.set_index(['Date'])
     # # print a
     return json_result
+
+
+    # change a,b here
+
+    new_price = price_data(a,b)
+    price_data.save_to_mongo(new_price)
+
+    new_factor = factor_data(a,b)
+    fator_data.save_to_mongo(new_factor)
