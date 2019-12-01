@@ -169,9 +169,30 @@ def confirm_survey():
         updated_survey = Database.find_one("surveys", {"email": session.get('email', None)})
 
         updated_survey["name"] = request.form.get('name')
-        updated_survey["num_asset"] = request.form.get('assets')
-        updated_survey["inv_time"]= request.form.get('horizon')
-        updated_survey["reb_time"] = request.form.get('rebalance')
+
+        if (request.form.get('assets') == ""):
+            updated_survey["num_asset"] = 10
+        else:
+            updated_survey["num_asset"] = request.form.get('assets')
+
+        if (request.form.get('horizon') == ""):
+            updated_survey["inv_time"] = 5
+        else:
+            updated_survey["inv_time"] = request.form.get('horizon')
+
+        if (request.form.get('rebalance') == ""):
+            updated_survey["reb_time"] = 0.5
+        else:
+            updated_survey["reb_time"] = request.form.get('rebalance')
+        
+
+
+
+
+
+
+
+
         updated_survey["gender"] = request.form.get('q1')
         updated_survey["age"] = request.form.get('q2')
         updated_survey["employment"] = request.form.get('q3')
