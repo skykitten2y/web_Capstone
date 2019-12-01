@@ -1,15 +1,15 @@
 
 import numpy as np
 import pandas as pd
-from FF import FF
+from src.business_logic_function.FF import FF
 
 
 
 
-def firstunction (given_portfolio, price_data,factor_data,horizon):
+def firstfunction (given_portfolio, price_data,factor_data,horizon):
 
     rebalancing = 0.5
-    horizon_time = horizon['horizon']
+    horizon_time = horizon
     totalperiod = horizon_time / rebalancing
 
 
