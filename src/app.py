@@ -661,10 +661,10 @@ def function1_results():
                 139.2579019704]}
     riskfree = 0.0018
     returns, risk = firstfunction(given_portfolio, price_data, factor_data, time)
-
+    retr_temp = returns[0][0]
     retr = round(returns[0][0]*100,2)
     risk = round(risk[0][0],2)
-    sr = round((retr - riskfree) / risk,2)
+    sr = round((retr_temp - riskfree) / risk,2)
 
     # sp500_sr_1y = 5.4
     # sp500_sr_3y = 1.07
