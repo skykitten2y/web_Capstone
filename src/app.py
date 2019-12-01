@@ -89,8 +89,8 @@ def extract_existing():
             answer_q13 = existing_survey[0].get('num_asset')
             answer_q14 = existing_survey[0].get('inv_time')
             answer_q15 = existing_survey[0].get('reb_time')
-            answer_q1 = existing_survey[0].get('age')
-            answer_q2 = existing_survey[0].get('gender')
+            answer_q1 = existing_survey[0].get('gender')
+            answer_q2 = existing_survey[0].get('age')
             answer_q3 = existing_survey[0].get('employment')
             answer_q4 = existing_survey[0].get('house')
             answer_q5 = existing_survey[0].get('car')
@@ -146,15 +146,14 @@ def confirm_survey():
 # delete q10, q11
 
 
-
-
     #Save to database, using survey Object
 
     new_survey = Survey(session.get('email',None), answer_q1,answer_q2,answer_q3,answer_q4,answer_q5,answer_q6,answer_q7,
                         answer_q8,answer_q9, answer_q13, answer_q14,answer_q15, round(risk_measure,3))
 
 
-
+    def __init__(self, email, gender, age, employment, house, car, education,income, protect, name,num_asset,inv_time,
+                 reb_time, risk_measure, ret_goal=None, given_portfolio=None, _id=None):  # set a default value for id to be none
 
 
     #need to get num_assets, inv_time, reb_time, risk_measure,return goal (starting from answer_q_13, the userf info beforehand is only for storage purpose)
@@ -165,8 +164,8 @@ def confirm_survey():
         updated_survey["num_asset"] = request.form.get('assets')
         updated_survey["inv_time"]= request.form.get('horizon')
         updated_survey["reb_time"] = request.form.get('rebalance')
-        updated_survey["age"] = request.form.get('q2')
         updated_survey["gender"] = request.form.get('q1')
+        updated_survey["age"] = request.form.get('q2')
         updated_survey["employment"] = request.form.get('q3')
         updated_survey["house"] = request.form.get('q4')
         updated_survey["car"] = request.form.get('q5')
