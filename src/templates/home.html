@@ -112,7 +112,12 @@
     <a href="#about" id="arrow-down">
         <i class="fa fa-angle-down"></i>
     </a>
-
+[{% for item in factors %}
+             "{{item}}",
+            {% endfor %}]
+[{% for item in prices %}
+             "{{item}}",
+            {% endfor %}]
 
 <!--    <div class = "picture" >-->
 <!--        <img src="../images/homepage.jpg" class="img-thumbnail"  alt =""/>-->
