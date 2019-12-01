@@ -109,12 +109,14 @@
                 data: [{% for item in portfolio_value %}
              "{{item}}",
             {% endfor %}],
-                label: "Portfolio Value",
+                label: "Portfolio Value with Multi-Period MVO",
                 borderColor: "#3e95cd",
                 fill: false
               }, {
-                data: [100,110,120,130,140,150,160,170,180,190],
-                label: "S&P500",
+                data: [{% for item in portfolio_valuer %}
+             "{{item}}",
+            {% endfor %}],
+                label: "Portfolio Value with Robust Multi-Period MVO",
                 borderColor: "#8e5ea2",
                 fill: false
               },
@@ -144,7 +146,7 @@
                             <i class="fa fa-rocket"></i>
                             <h3>Portfolio Weights</h3>
                             <hr>
-                            <p>The portfolio weights are shown in the pie chart. You can move your mouse on the specific section to see the related numbers of the weights.</p>
+                            <p>The portfolio weights are shown in the pie chart. You can move your mouse on the specific section to see the weights of the portfolio.</p>
                         </div>
                     </div>
 
@@ -153,7 +155,7 @@
                             <i class="fa fa-rocket"></i>
                             <h3>Testing Value with Past Performance</h3>
                             <hr>
-                            <p> If you have invested with our portfolio {{inv_time}} years ago, you would achieve the result as shown in the line chart above. Since no target return has been set, the portfolio is built based on the optimal reward vs. risk ratio.
+                            <p> If you have invested with our portfolio {{inv_time}} years ago, you would achieve the result as shown in the line chart above. You can see two portfolio values but based on different models. Robust MVO has taken the future uncertainties into account, it results lower portfolio value. However, you can feel free to choose either method based on your confidence of our future estimations. Since no target return has been set, the portfolio is built based on the optimal reward vs. risk ratio.
 </p>
                         </div>
                     </div>
@@ -164,7 +166,7 @@
                             <h3>Portfolio's Sharpe Ratio vs. SP500's Sharpe Ratio</h3>
 
                             <hr>
-                            <p>Portfolio's Sharpe Ratio for {{inv_time}} years as {{sr}} clearly outperform SP500's Sharpe Ratio for {{inv_time}} years as {{sp500_sr_input}}, proving that our portfolio is better than the average investors in the market.</p>
+                            <p>Portfolio's Sharpe Ratio with MVO for {{inv_time}} years as {{sr}} clearly outperform SP500's Sharpe Ratio for {{inv_time}} years as {{sp500_sr_input}}, proving that our portfolio is better than the average investors in the market.</p>
                         </div>
                     </div>
 

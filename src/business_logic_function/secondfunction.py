@@ -248,7 +248,6 @@ def secondfunction (price_data,num_asset,inv_time,reb_time,risk_measure):
     z1 = cp.Variable(100*(int(totalperiod)-1))    ### 1 to T-1
 
 
-
     prob = cp.Problem(cp.Minimize(cp.quad_form(x,Qmatrix) - qmatrix@x + cmatrix.T@z1),
                       [z <= z1,
                        -z <= z1,
@@ -264,8 +263,32 @@ def secondfunction (price_data,num_asset,inv_time,reb_time,risk_measure):
     for i in range(len(weight)):
         if weight[i]<0.0000001:
             weight[i]=0
+    xr = cp.Variable(100 * int(totalperiod), nonneg=True)  ### 1 to T
+    yr = cp.Variable(100, boolean=True)
+    zr = cp.Variable(100 * (int(totalperiod) - 1))
+    z1r = cp.Variable(100 * (int(totalperiod) - 1))
 
-    return weight
+    delta = np.zeros((100 * int(totalperiod)))
+    for i in range(100 * int(totalperiod)):
+        delta[i] = (Qmatrix[i, i]) ** (0.5) * 0.43827
+
+    probr = cp.Problem(cp.Minimize(cp.quad_form(xr, Qmatrix) - qmatrix @ xr + delta.T @ xr + cmatrix.T @ z1r),
+                       [zr <= z1r,
+                        -zr <= z1r,
+                        onematrix @ zr == zeromatrix,
+                        onemat1 @ x + zr == onemat2 @ xr,
+                        onemat3.T @ yr == num_asset_parsed,
+                        xr <= onemat4 @ yr,
+                        onemat5.T @ xr == float(1)])
+
+    probr.solve()
+    weightr = xr.value
+
+    for i in range(len(weightr)):
+        if weightr[i] < 0.0000001:
+            weightr[i] = 0
+
+    return weight,weightr
 
 
 
