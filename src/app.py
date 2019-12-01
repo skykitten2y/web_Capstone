@@ -152,8 +152,7 @@ def confirm_survey():
                         answer_q8,answer_q9, answer_q13, answer_q14,answer_q15, round(risk_measure,3))
 
 
-    def __init__(self, email, gender, age, employment, house, car, education,income, protect, name,num_asset,inv_time,
-                 reb_time, risk_measure, ret_goal=None, given_portfolio=None, _id=None):  # set a default value for id to be none
+
 
 
     #need to get num_assets, inv_time, reb_time, risk_measure,return goal (starting from answer_q_13, the userf info beforehand is only for storage purpose)
