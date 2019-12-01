@@ -41,13 +41,11 @@ def secondfunction (price_data,num_asset,inv_time,reb_time,risk_measure):
         predictedQ.append(yhat.variance.values[-1])
 
 
-        history = ret[:]
-        for t in range(int(totalperiod)):
-            modelmu = ARIMA(history, order = (1,1,0))
-            model_fit_mu = modelmu.fit(disp=0)
-            output = model_fit_mu.forecast()
-            predictedmu.append(output[0])
-            history.append(output[0])
+
+        modelmu = ARIMA(ret, order = (1,1,0))
+        model_fit_mu = modelmu.fit(disp=0)
+        output = model_fit_mu.forecast(int(totalperiod),alpha=0.05)
+        predictedmu.append(output[0])
 
     #
     # Y = pd.DataFrame(rets)
@@ -200,7 +198,7 @@ def secondfunction (price_data,num_asset,inv_time,reb_time,risk_measure):
 
     for i in range(int(totalperiod)):
         for j in range(100):
-            mumatrix[i*100+j] = predictedmu[j*int(totalperiod)+i]
+            mumatrix[i*100+j] = predictedmu[j][i]
 
 
     lamda = 0.12*(risk_measure_parsed/2.2361)
