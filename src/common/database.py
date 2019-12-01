@@ -12,7 +12,7 @@ class Database(object):  #get general Database class as well as object you defin
     def initialize():
         #db = pymongo.MongoClient(Database.uri) #access uri through Database class, that's why we called static
         Database.DATABASE = db.get_default_database()
-        Database.DATABASE = db['fullstack']
+        #Database.DATABASE = db['fullstack']
     @staticmethod
     def insert(collection,data):
         Database.DATABASE[collection].insert(data)

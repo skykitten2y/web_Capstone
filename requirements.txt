@@ -5,8 +5,8 @@ flasker == 0.1.45
 uwsgi
 arch == 4.11
 statsmodels == 0.10.2
-numpy == 1.17.4
+numpy == 1.17.3
 cvxpy == 1.0.25
-pandas == 0.25.3
+pandas == 0.25.2
 
 
