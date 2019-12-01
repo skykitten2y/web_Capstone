@@ -58,7 +58,7 @@ class Database(object):  #get general Database class as well as object you defin
         for k in range(100):
             price_list.append(prices[k]['Prices'])
         for i in range(100):
-            price_raw_data[priceNames[i]] = price_list[i]
+            price_raw_data[price_list[i]] = price_list[i]
 
         return price_raw_data
 
@@ -81,5 +81,5 @@ class Database(object):  #get general Database class as well as object you defin
         for k in range(5):
             value_list.append(factors[k]['Values'])
         for i in range(5):
-            factor_raw_data[factorNames[i]] = value_list[i]
+            factor_raw_data[factor_list[i]] = value_list[i]
         return factor_raw_data
