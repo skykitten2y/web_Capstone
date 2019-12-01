@@ -184,12 +184,6 @@ def confirm_survey():
             updated_survey["reb_time"] = 0.5
         else:
             updated_survey["reb_time"] = request.form.get('rebalance')
-        
-
-
-
-
-
 
 
 
