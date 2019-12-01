@@ -4,15 +4,15 @@ import pymongo
 
 class Database(object):  #get general Database class as well as object you defined below
     uri = os.environ.get("MONGODB_URI")
-    #uri = "mongodb://127.0.0.1:27017"
+    # uri = "mongodb://127.0.0.1:27017"
     DATABASE = None
     # with out initialize method, since all database need to access the same uri and database
 
     @staticmethod  #tell python we are not using self in this method
     def initialize():
-        #db = pymongo.MongoClient(Database.uri) #access uri through Database class, that's why we called static
+        db = pymongo.MongoClient(Database.uri) #access uri through Database class, that's why we called static
         Database.DATABASE = db.get_default_database()
-        #Database.DATABASE = db['fullstack']
+        # Database.DATABASE = db['fullstack']
     @staticmethod
     def insert(collection,data):
         Database.DATABASE[collection].insert(data)
