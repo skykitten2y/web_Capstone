@@ -109,7 +109,7 @@
                 data: [{% for item in portfolio_value %}
              "{{item}}",
             {% endfor %}],
-
+                label: "Portfolio Value",
                 borderColor: "#3e95cd",
                 fill: false
               }, {
@@ -122,8 +122,7 @@
           },
           options: {
             title: {
-              display: true,
-              text: 'Portfolio Value'
+     
             }
           }
         });
