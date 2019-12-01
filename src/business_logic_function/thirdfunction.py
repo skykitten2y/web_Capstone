@@ -13,14 +13,14 @@ from statsmodels.tsa.arima_model import ARIMA
 def thirdfunction (price_data,num_asset,inv_time,reb_time,return_goal):
 
     price_parsed = price_data
-    num_asset_parsed = num_asset['num_asset']
+    num_asset_parsed = int(float(num_asset))
     inv_time_parsed = inv_time
     reb_time_parsed = reb_time
 
-    investment_time = inv_time_parsed['inv_time']
-    rebalancing = reb_time_parsed['reb_time']
+    investment_time = int(inv_time_parsed)
+    rebalancing = float(reb_time_parsed)
     totalperiod = investment_time/rebalancing
-    return_goal = return_goal['return_goal']
+    return_goal = float(return_goal)
 
     flt = float(0)
 
@@ -43,13 +43,11 @@ def thirdfunction (price_data,num_asset,inv_time,reb_time,return_goal):
         predictedQ.append(yhat.variance.values[-1])
 
 
-        history = ret[:]
-        for t in range(int(totalperiod)):
-            modelmu = ARIMA(history, order = (1,1,0))
-            model_fit_mu = modelmu.fit(disp=0)
-            output = model_fit_mu.forecast()
-            predictedmu.append(output[0])
-            history.append(output[0])
+
+        modelmu = ARIMA(ret, order = (1,1,0))
+        model_fit_mu = modelmu.fit(disp=0)
+        output = model_fit_mu.forecast(int(totalperiod),alpha=0.05)
+        predictedmu.append(output[0])
 
 
 
@@ -64,7 +62,7 @@ def thirdfunction (price_data,num_asset,inv_time,reb_time,return_goal):
 
     for i in range(int(totalperiod)):
         for j in range(100):
-            mumatrix[i*100+j] = predictedmu[j*int(totalperiod)+i]
+            mumatrix[i*100+j] = predictedmu[j][i]
 
 
     mumatrix_mat = np.zeros((int(totalperiod), 100 * int(totalperiod)))
@@ -72,10 +70,11 @@ def thirdfunction (price_data,num_asset,inv_time,reb_time,return_goal):
         for j in range(100):
             mumatrix_mat[i,i*100+j] = mumatrix[i*100+j]
 
-
+    temp = ((1+return_goal) ** (1/totalperiod)) - 1
     return_goal_mat = np.zeros((int(totalperiod)))
     for i in range(int(totalperiod)):
-        return_goal_mat[i] = ((1+return_goal) ** (1/totalperiod)) - 1
+        return_goal_mat[i] = temp
+
 
     cmatrix = np.ones((100*(int(totalperiod)-1),1))*0.5  #####need to specify c (0.5)
 
