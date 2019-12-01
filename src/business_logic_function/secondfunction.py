@@ -11,13 +11,13 @@ def secondfunction (price_data,num_asset,inv_time,reb_time,risk_measure):
 
     price_parsed = price_data
 
-    num_asset_parsed = num_asset['num_asset']
+    num_asset_parsed = int(num_asset)
     inv_time_parsed = inv_time
     reb_time_parsed = reb_time
-    risk_measure_parsed = risk_measure['risk_measure']
+    risk_measure_parsed = risk_measure
 
-    investment_time = inv_time_parsed['inv_time']
-    rebalancing = reb_time_parsed['reb_time']
+    investment_time = float(inv_time_parsed)
+    rebalancing = float(reb_time_parsed)
     totalperiod = investment_time/rebalancing
 
     flt = float(0)

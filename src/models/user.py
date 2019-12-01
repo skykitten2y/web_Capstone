@@ -86,82 +86,82 @@ class User(object):
         rw = 0  # risk_weight
         # q1
         if (answer_q1 == "Male"):
-            rw = rw + 1
+            rw = rw + 0.075
         else:
-            rw = rw + 0
+            rw = rw + 0.05
         # q2
         if (answer_q2 == "18-30"):
-            rw = rw + 2
+            rw = rw + 0.1444
         elif (answer_q2 == "30-45"):
-            rw = rw + 3
+            rw = rw + 0.2166
         elif (answer_q2 == "45-60"):
-            rw = rw + 2
+            rw = rw + 0.1444
         elif(answer_q2 == "60+"):
-            rw = rw + 1
+            rw = rw + 0.0722
         else:
             rw =rw + 0
         # q3
         if (answer_q3 == "Employed"):
-            rw = rw + 3
+            rw = rw + 0.483
         elif (answer_q3 == "Unemployed"):
-            rw = rw + 2
+            rw = rw + 0.322
         elif(answer_q3 == "Retired"):
-            rw = rw + 1
+            rw = rw + 0.161
         else:
             rw = rw +0
         # q4
         if (answer_q4 == "No"):
-            rw = rw + 5
+            rw = rw + 0.916
         elif (answer_q4 == "Within 1-3 years"):
-            rw = rw + 1
+            rw = rw + 0.1833
         elif (answer_q4 == "Within 3-5 years"):
-            rw = rw + 2
+            rw = rw + 0.3664
         elif( answer_q4 == "More than 5 years"):
-            rw = rw + 3
+            rw = rw + 0.3498
         else:
             rw = rw+0
         # q5
         if (answer_q5 == "No"):
-            rw = rw + 5
+            rw = rw + 0.583
         elif (answer_q5 == "Within 1-3 years"):
-            rw = rw + 1
+            rw = rw + 0.1166
         elif (answer_q5 == "Within 3-5 years"):
-            rw = rw + 2
+            rw = rw + 0.2332
         elif (answer_q5 == "More than 5 years"):
-            rw = rw + 3
+            rw = rw + 0.5496
         else:
             rw = rw + 0
         # q6
         if (answer_q6 == "No"):
-            rw = rw + 5
+            rw = rw + 0.583
         elif (answer_q6 == "Within 1-3 years"):
-            rw = rw + 1
+            rw = rw + 0.1166
         elif (answer_q6 == "Within 3-5 years"):
-            rw = rw + 2
+            rw = rw + 0.2332
         elif (answer_q6 == "More than 5 years"):
-            rw = rw + 3
+            rw = rw + 0.5496
         else:
             rw = rw + 0
         # q7
         if (answer_q7 == "30k-50k"):
-            rw = rw + 1
+            rw = rw + 0.2054
         elif (answer_q7 == "50k-100k"):
-            rw = rw + 2
+            rw = rw + 0.4108
         elif (answer_q7 == "100k-200k"):
-            rw = rw + 3
+            rw = rw + 0.6162
         elif(answer_q7 == "more than 200k"):
-            rw = rw + 4
+            rw = rw + 0.8216
         else:
             rw = rw+0
         # q8
         if (answer_q8 == "Strongly Agree"):
-            rw = rw + 1
+            rw = rw + 0.0944
         elif (answer_q8 == "Agree"):
-            rw = rw + 2
+            rw = rw + 0.1888
         elif (answer_q8 == "Disagree"):
-            rw = rw + 3
+            rw = rw + 0.2832
         elif(answer_q8 == "Strongly Disagree"):
-            rw = rw + 4
+            rw = rw + 0.3776
         else:
             rw = rw+0
         return rw

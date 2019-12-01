@@ -79,6 +79,7 @@ class Survey(object):
             'reb_time':self.reb_time,
             'risk_measure':self.risk_measure,
             'ret_goal':self.ret_goal,
-            'given_portfolio':self.given_portfolio
+            'given_portfolio':self.given_portfolio,
+
 
         }
