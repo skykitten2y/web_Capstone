@@ -9,17 +9,19 @@ from arch import arch_model
 from statsmodels.tsa.arima_model import ARIMA
 
 
-
 def thirdfunction (price_data,num_asset,inv_time,reb_time,return_goal):
 
     price_parsed = price_data
-    num_asset_parsed = int(float(num_asset))
+
+    num_asset_parsed = int(num_asset)
     inv_time_parsed = inv_time
     reb_time_parsed = reb_time
 
-    investment_time = int(inv_time_parsed)
+    investment_time = float(inv_time_parsed)
     rebalancing = float(reb_time_parsed)
-    totalperiod = investment_time/rebalancing
+    totalperiod = investment_time / rebalancing
+
+
     return_goal = float(return_goal)
 
     flt = float(0)
@@ -41,7 +43,6 @@ def thirdfunction (price_data,num_asset,inv_time,reb_time,return_goal):
         model_fit = model.fit()
         yhat = model_fit.forecast(horizon = int(totalperiod))
         predictedQ.append(yhat.variance.values[-1])
-
 
 
         modelmu = ARIMA(ret, order = (1,1,0))
@@ -70,11 +71,10 @@ def thirdfunction (price_data,num_asset,inv_time,reb_time,return_goal):
         for j in range(100):
             mumatrix_mat[i,i*100+j] = mumatrix[i*100+j]
 
-    temp = ((1+return_goal) ** (1/totalperiod)) - 1
+
     return_goal_mat = np.zeros((int(totalperiod)))
     for i in range(int(totalperiod)):
-        return_goal_mat[i] = temp
-
+        return_goal_mat[i] = ((1+return_goal) ** (1/totalperiod)) - 1
 
     cmatrix = np.ones((100*(int(totalperiod)-1),1))*0.5  #####need to specify c (0.5)
 

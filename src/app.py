@@ -471,6 +471,9 @@ def store_investor_expected_return():
 
     riskfree = 0.0018
 
+
+
+
     num_asset = Database.find_one("surveys", {"email": session.get('email', None)})['num_asset']
     inv_time = Database.find_one("surveys", {"email": session.get('email', None)})['inv_time']
     reb_time = Database.find_one("surveys", {"email": session.get('email', None)})['reb_time']
