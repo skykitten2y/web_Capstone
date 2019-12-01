@@ -134,6 +134,15 @@ def confirm_survey():
     answer_q13 = request.form.get('assets')
     answer_q14 = request.form.get('horizon')
     answer_q15 = request.form.get('rebalance')
+    if(answer_q13 == ""):
+        answer_q13 = 10
+
+    if(answer_q14 == ""):
+        answer_q14 = 5
+
+    if(answer_q15 == ""):
+        answer_q15 = 0.5
+
     answer_q1 = request.form.get('q1')
     answer_q2 = request.form.get('q2')
     answer_q3 = request.form.get('q3')

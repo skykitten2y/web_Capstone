@@ -272,11 +272,12 @@ def secondfunction (price_data,num_asset,inv_time,reb_time,risk_measure):
     for i in range(100 * int(totalperiod)):
         delta[i] = (Qmatrix[i, i]) ** (0.5) * 0.43827
 
-    probr = cp.Problem(cp.Minimize(cp.quad_form(xr, Qmatrix) - qmatrix @ xr + delta.T @ xr + cmatrix.T @ z1r),
+    qrmatrix = qmatrix - delta.T@Amatrix
+    probr = cp.Problem(cp.Minimize(cp.quad_form(xr, Qmatrix) - qrmatrix @ xr + cmatrix.T @ z1r),
                        [zr <= z1r,
                         -zr <= z1r,
                         onematrix @ zr == zeromatrix,
-                        onemat1 @ x + zr == onemat2 @ xr,
+                        onemat1 @ xr + zr == onemat2 @ xr,
                         onemat3.T @ yr == num_asset_parsed,
                         xr <= onemat4 @ yr,
                         onemat5.T @ xr == float(1)])
