@@ -52,16 +52,15 @@
 		     //text box increment
             $(wrapper).append('<div class="form-group"><label for="input_stocks"><select class="selectpicker" name="input_portfolio" data-size="7" data-style="btn btn-primary btn-round" title="select" data-live-search="true">' +
                                 '<optgroup label = "Technology">' +
-                                '<option>AAPL</option>' +
+                                '<option value="AAPL">AAPL	Apple, Inc.</option>' +
                                 '<option value="MSFT">MSFT	Microsoft Corp. </option>' +
-                                '<option>GOOG</option>' +
+                                '<option value="GOOG">GOOG	Alphabet, Inc. </option>' +
                                 '<option value="GOOGL">GOOGL	Alphabet, Inc. </option>' +
                                 '<option value="AMZN">AMZN	FB	Facebook, Inc. </option>' +
                                 '<option value="INTC">INTC	Intel Corp. </option>' +
                                 '<option value="VZ">VZ	Verizon Communications, Inc.</option>' +
                                 '<option value="CSCO">CSCO	Cisco Systems, Inc.</option>' +
                                 '<option value="ADBE">ADBE	Adobe, Inc.</option>' +
-                                '<option value="PYPL">PYPL	PayPal Holdings, Inc.</option>' +
                                 '<option value="NVDA">NVDA	NVIDIA Corp.</option>' +
                                 '<option value="UTX">UTX	United Technologies Corp.</option>' +
                                 '<option value="NFLX">NFLX	Netflix, Inc.</option>' +
@@ -69,10 +68,15 @@
                                 '<option value="ORCL">ORCL	Oracle Corp.</option>' +
                                 '<option value="TXN">TXN	Texas Instruments Incorporated</option>' +
                                 '<option value="QCOM">QCOM	QUALCOMM, Inc.</option>' +
+                                '<option value="FIS"> FIS Fidelity National Information Services</option>' +
+                                '<option value="CRM"> CRM Salesforce.Com Inc</option>' +
+                                '<option value="AVGO"> AVGO Broadcom Inc</option>' +
+                                '<option value="BSX"> BSX Boston Scientific Corp</option>' +
+                                '<option value="ADP"> ADP Automatic Data Process</option>' +
+                                '<option value="INTU"> INTU Intuit Inc</option>' +
                                 '</optgroup>' +
 
                                 '<optgroup label = "Financial">' +
-                                '<option value="BRK.B">BRK.B	Berkshire Hathaway, Inc.</option>' +
                                 '<option value="JPM">JPM	JPMorgan Chase & Co.</option>' +
                                 '<option value="V">V	Visa, Inc.</option>' +
                                 '<option value="MA">MA	Mastercard, Inc. </option>' +
@@ -84,10 +88,13 @@
                                 '<option value="USB">USB	U.S. Bancorp</option>' +
                                 '<option value="GS">GS	The Goldman Sachs Group, Inc.</option>' +
                                 '<option value="MS">MS	Morgan Stanley</option>' +
-                                '<option value="ALL">ALL    Allstate</option>' +
-                                '<option value="DOW">DOW    Dow Inc.</option>' +
-                                '<option value="MET">MET    MetLife Inc.</option>' +
-                                '<option value="WBA">WBA    Walgreens Boots Alliance</option>' +
+                                '<option value="CME">CME	CME Group</option>' +
+                                '<option value="BLK">BLK	Blackrock</option>' +
+                                '<option value="Berk">Berk	Berkshire Bancorp</option>' +
+                                '<option value="CB">CB	Chubb Ltd </option>' +
+                                '<option value="BAC">BAC	Bank Of America Corp </option>' +
+                                '<option value="SPGI">SPGI	S&P Global Inc </option>' +
+                                '<option value="PNC">PNC	PNC Bank </option>' +
                                 '</optgroup>' +
 
 
@@ -97,11 +104,9 @@
                                 '<optgroup label = "Healthcare">' +
                                 '<option value="JNJ">JNJ	Johnson & Johnson </option>' +
                                 '<option value="MRK">MRK	Merck & Co., Inc.</option>' +
-                                '<option value="UHN">UNH	UnitedHealth Group, Inc.</option>' +
-                                '<option value="PRE">PFE	Pfizer Inc.</option>' +
+                                '<option value="PFE">PFE	Pfizer Inc.</option>' +
                                 '<option value="ABT">ABT	Abbott Laboratories</option>' +
                                 '<option value="MDT">MDT	Medtronic Plc</option>' +
-                                '<option value="ABBV">ABBV	AbbVie, Inc.</option>' +
                                 '<option value="LLY">LLY	Eli Lilly & Co.</option>' +
                                 '<option value="SPG">SPG	Simon Property Group, Inc.</option>' +
                                 '<option value="DHR">DHR	Danaher Corp.</option>' +
@@ -110,7 +115,14 @@
                                 '<option value="GILD">GILD	Gilead Sciences, Inc.' +
                                 '<option value="CELG">CELG	Celgene Corp.</option>' +
                                 '<option value="AGN">AGN    Allergan</option>' +
-                                '<option value="BIIB">BIIB   Biogen</option>' +
+                                '<option value="SYK">SYK    Stryker Corp</option>' +
+                                '<option value="TMO">TMO    Thermo Fisher Scientific Inc</option>' +
+                                '<option value="AMT">AMT    American Tower Corp</option>' +
+                                '<option value="ANTM">ANTM   Anthem Inc</option>' +
+                                '<option value="BDX">BDX   Becton Dickinson And Company </option>' +
+                                '<option value="CI">CI   Cigna Corp </option>' +
+                                '<option value="UNH">UNH  Unitedhealth Group Inc  </option>' +
+                                '<option value="ISGR">ISGR  Intuitive Surg Inc </option>' +
                                 '</optgroup>' +
 
 
@@ -123,9 +135,7 @@
                                 '<option value="MO">MO	Altria Group, Inc.</option>' +
                                 '<option value="MDLZ">MDLZ	Mondelez International, Inc.</option>' +
                                 '<option value="CL">CL     Colgate-Palmolive</option>' +
-                                '<option value="F">F      Ford Motor Company</option>' +
-                                '<option value="GM">GM     General Motors</option>' +
-                                '<option value="KHC">KHC    Kraft Heinz</option>' +
+                                '<option value="EL">EL     Estee Lauder Companies (EL)</option>' +
                                 '</optgroup>' +
 
 
@@ -140,7 +150,8 @@
                                 '<option value="BKNG">BKNG	Booking Holdings, Inc.</option>' +
                                 '<option value="NKE">NKE	NIKE, Inc.</option>' +
                                 '<option value="LOW">LOW	Lowe Cos., Inc.</option>' +
-                                '<option value="TGT">TGT Target Corporation</option>' +
+                                '<option value="TJX">TJX	TJX Companies</option>' +
+                                '<option value="PLD">PLD	Prologis Inc (PLD)</option>' +
                                 '</optgroup>' +
 
 
@@ -153,12 +164,7 @@
                                 '<option value="DUK">DUK	Duke Energy Corp.</option>' +
                                 '<option value="SO">SO	The Southern Co.</option>' +
                                 '<option value="COP">COP	ConocoPhillips</option>' +
-                                '<option value="EMR">EMR    Emerson Electric Co.</option>' +
-                                '<option value="EXC">EXC    Exelon</option>' +
-                                '<option value="KMI">KMI    Kinder Morgan</option>' +
-                                '<option value="OXY">OXY    Occidental Petroleum Corp.</option>' +
-                                '<option value="SLB">SLB    Schlumberger</option>' +
-
+                                '<option value="D">D	Dominion Resources</option>' +
 
 
 
@@ -167,8 +173,8 @@
                                 '<optgroup label = "Telcomm">' +
                                 '<option value="T">T	AT&T, Inc.</option>' +
                                 '<option value="CMCSA">CMCSA	Comcast Corp.</option>' +
-                                '<option value="CHTR">CHTR	Charter Communications, Inc.</option>' +
                                 '<option value="DIS">DIS	The Walt Disney Co.</option>' +
+                                '<option value="TMUS">TMUS	T-Mobile US</option>' +
                                 '</optgroup>' +
 
                                 '<optgroup label = "Industrial">' +
@@ -176,8 +182,8 @@
                                 '<option value="HON">HON	Honeywell International, Inc.</option>' +
                                 '<option value="MMM">MMM	3M Co.</option>' +
                                 '<option value="CAT">CAT	Caterpillar, Inc.</option>' +
-                                '<option value="GD">GD     General Dynamics</option>' +
-                                '<option value="RTN">RTN    Raytheon Co..</option>' +
+                                '<option value="RTN">RTN    Raytheon Co.</option>' +
+                                '<option value="CSX">CSX    CSX Group</option>' +
                                 '</optgroup> ' +
 
 
@@ -186,8 +192,6 @@
                                 '<option value="UNP">UNP	Union Pacific Corp. </option>' +
                                 '<option value="UPS">UPS	United Parcel Service, Inc.</option>' +
                                 '<option value="AXP">AXP	American Express Co.</option>' +
-                                '<option value="DD">DD     DuPont de Nemours Inc</option>' +
-                                '<option value="FDX">FDX    FedEx</option>' +
                                 '</optgroup></select>' +
 
                                 '<a href="#" class="remove_field"><i class="fa fa-times"></div>'
@@ -201,6 +205,32 @@
 
 });
 	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
