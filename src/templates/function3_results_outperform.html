@@ -112,6 +112,13 @@
                 label: "Portfolio Value with MVO",
                 borderColor: "#3e95cd",
                 fill: false
+              }, {
+                data: [{% for item in portfolio_valuer %}
+             "{{item}}",
+            {% endfor %}],
+                label: "Portfolio Value with Robust MVO",
+                borderColor: "#8e5ea2",
+                fill: false
               },
             ]
           },
@@ -146,7 +153,7 @@
                             <i class="fa fa-rocket"></i>
                             <h3>Testing Value with Past Performance</h3>
                             <hr>
-                            <p> If you have invested with our portfolio {{inv_time}} years ago, you would achieve the result as shown in the line chart above. Since no target return has been set, the portfolio is built based on the optimal reward vs. risk ratio.
+                            <p> If you have invested with our portfolio {{inv_time}} years ago, you would achieve the result as shown in the line chart above. You can see two portfolio values but based on different models. Robust MVO has taken the future uncertainties into account, it results lower portfolio value. However, you can feel free to choose either method based on your confidence of our future estimations.
 </p>
                         </div>
                     </div>

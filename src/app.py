@@ -498,11 +498,15 @@ def store_investor_expected_return():
     rebalance = float(reb_time)
     totalperiod = int(investmenthorizon / rebalance)
     # store rw and output it here
-    weight = thirdfunction(price_data, num_asset, inv_time, reb_time, rw, return_goal)
+    weight,weights = thirdfunction(price_data, num_asset, inv_time, reb_time, rw, return_goal)
 
     stock = []
+    stockr = []
     weights = []
+    weightsr = []
+
     currentweight = weight[0:100]
+    currentweightr = weightr[0:100]
 
     ####### get the current portfolio
     portfolio = {}
@@ -516,9 +520,23 @@ def store_investor_expected_return():
             stock.append(key)
             weights.append(portfolio[key])
 
+    portfolior = {}
+    tempr = 0
+    for key in price_data.keys():
+        portfolior[key] = currentweightr[tempr]
+        tempr = tempr + 1
+
+    for keyr in portfolior.keys():
+        if portfolior[keyr] != 0:
+            stockr.append(keyr)
+            weightsr.append(portfolior[keyr])
+
     initial_portfolio_value = 100
+    initial_portfolio_valuer = 100
     portfolio_value = []
+    portfolio_valuer = []
     portfolio_value.append(initial_portfolio_value)
+    portfolio_valuer.append(initial_portfolio_valuer)
 
     l = []
     for key in price_data.keys():
@@ -542,8 +560,13 @@ def store_investor_expected_return():
     for i in range(totalperiod):
         port_val = weight[i * 100:(i + 1) * 100].T @ totalreturn_list[
                                                      i * 100:(i + 1) * 100] * initial_portfolio_value
+
+        port_valr = weightr[i * 100:(i + 1) * 100].T @ totalreturn_list[
+                                                       i * 100:(i + 1) * 100] * initial_portfolio_valuer
         portfolio_value.append(port_val)
+        portfolio_valuer.append(port_valr)
         initial_portfolio_value = port_val
+        initial_portfolio_valuer = port_valr
 
     time = []
     for i in range(totalperiod):
@@ -558,7 +581,7 @@ def store_investor_expected_return():
     portfolio_var = np.var(portfolio_return_list)
     port_sharpe_ratio = (portfolio_return - riskfree) / np.sqrt(portfolio_var)
 
-    sr = round(port_sharpe_ratio, 2)  # input sharpe ratio from portfolio # input sharpe ratio from portfolio
+    sr = round(port_sharpe_ratio, 2)  # input sharpe ratio from portfolio
     # sp500_sr_1y = 5.4
     # sp500_sr_3y = 1.07
     # sp500_sr_5y = 0.83
@@ -573,10 +596,10 @@ def store_investor_expected_return():
 
     if (sr >= sp500_sr_input):
         return render_template("function3_results_outperform.html", weight=weights, stock=stock, sr=sr,
-                               inv_time=inv_time, sp500_sr_input=round(sp500_sr_input, 2), ret_goal = ret_goal, portfolio_value = portfolio_value, time=time)
+                               inv_time=inv_time, sp500_sr_input=round(sp500_sr_input, 2), ret_goal = ret_goal, portfolio_value = portfolio_value, portfolio_valuer = portfolio_valuer,time=time)
     else:
         return render_template("function3_results_underperform.html", weight=weights, stock=stock, sr=sr,
-                               inv_time=inv_time, sp500_sr_input=round(sp500_sr_input, 2), ret_goal = ret_goal, portfolio_value= portfolio_value, time=time)
+                               inv_time=inv_time, sp500_sr_input=round(sp500_sr_input, 2), ret_goal = ret_goal, portfolio_value= portfolio_value, portfolio_valuer=portfolio_valuer, time=time)
 
 
 

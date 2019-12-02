@@ -81,7 +81,7 @@ def thirdfunction (price_data,num_asset,inv_time,reb_time,risk_measure, return_g
     mumatrix_mat = np.zeros((int(totalperiod), 100 * int(totalperiod)))
     for i in range(int(totalperiod)):
         for j in range(100):
-            mumatrix_mat[i, i * 100 + j] = mumatrix[i * 100 + j]
+            mumatrix_mat[i, i * 100 + j] = mumatrix[i * 100 + j] - (((Qmatrix[i*100+j, i*100+j]) ** (0.5)) * 0.43827)
 
     return_goal_mat = np.zeros((int(totalperiod)))
     for i in range(int(totalperiod)):
@@ -142,4 +142,29 @@ def thirdfunction (price_data,num_asset,inv_time,reb_time,risk_measure, return_g
         if weight[i]<0.0000001:
             weight[i]=0
 
-    return weight
+    xr = cp.Variable(100 * int(totalperiod), nonneg=True)  ### 1 to T
+    yr = cp.Variable(100, boolean=True)
+    zr = cp.Variable(100 * (int(totalperiod) - 1))
+    z1r = cp.Variable(100 * (int(totalperiod) - 1))
+
+
+    probr = cp.Problem(cp.Minimize(cp.quad_form(xr, Qmatrix) - qmatrix @ xr + cmatrix.T @ z1r),
+                       [zr <= z1r,
+                        -zr <= z1r,
+                        onematrix @ zr == zeromatrix,
+                        onemat1 @ xr + zr == onemat2 @ xr,
+                        onemat3.T @ yr == num_asset_parsed,
+                        xr <= onemat4 @ yr,
+                        onemat5.T @ xr == float(1),
+                        mumatrix_mat @ x >= return_goal_mat
+                        ])
+
+    probr.solve()
+    weightr = xr.value
+
+    for i in range(len(weightr)):
+        if weightr[i] < 0.0000001:
+            weightr[i] = 0
+
+
+    return weight,weightr
