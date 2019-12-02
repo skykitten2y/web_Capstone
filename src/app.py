@@ -17,7 +17,7 @@ app = Flask(__name__) #'  main  '
 
 app.secret_key ="Leon19970309" #flask uses to make sure cookie is secure
 
-@app.route('/')
+@app.route('/home')
 def home_template():
 
     # factorNames=['AAPL','MSFT','GOOGL','AMZN','BERK','JPM','JNJ','WMT','V','PG',
