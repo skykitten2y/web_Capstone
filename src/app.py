@@ -138,7 +138,7 @@ def confirm_survey():
         answer_q13 = 10
 
     if(answer_q14 == ""):
-        answer_q14 = 5
+        answer_q14 = 4
 
     if(answer_q15 == ""):
         answer_q15 = 0.5
@@ -176,7 +176,7 @@ def confirm_survey():
             updated_survey["num_asset"] = request.form.get('assets')
 
         if (request.form.get('horizon') == ""):
-            updated_survey["inv_time"] = 5
+            updated_survey["inv_time"] = 4
         else:
             updated_survey["inv_time"] = request.form.get('horizon')
 
