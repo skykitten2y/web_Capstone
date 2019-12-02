@@ -493,12 +493,12 @@ def store_investor_expected_return():
     inv_time = Database.find_one("surveys", {"email": session.get('email', None)})['inv_time']
     reb_time = Database.find_one("surveys", {"email": session.get('email', None)})['reb_time']
     return_goal = Database.find_one("surveys", {"email": session.get('email', None)})['ret_goal']
-
+    rw = Database.find_one("surveys", {"email": session.get('email', None)})['risk_measure']
     investmenthorizon = float(inv_time)
     rebalance = float(reb_time)
     totalperiod = int(investmenthorizon / rebalance)
     # store rw and output it here
-    weight = thirdfunction(price_data, num_asset, inv_time, reb_time, return_goal)
+    weight = thirdfunction(price_data, num_asset, inv_time, reb_time, rw, return_goal)
 
     stock = []
     weights = []
@@ -575,7 +575,7 @@ def store_investor_expected_return():
         return render_template("function3_results_outperform.html", weight=weights, stock=stock, sr=sr,
                                inv_time=inv_time, sp500_sr_input=round(sp500_sr_input, 2), ret_goal = ret_goal, portfolio_value = portfolio_value, time=time)
     else:
-        return render_template("function3_results_underperform.html", weight=weight, stock=stock, sr=sr,
+        return render_template("function3_results_underperform.html", weight=weights, stock=stock, sr=sr,
                                inv_time=inv_time, sp500_sr_input=round(sp500_sr_input, 2), ret_goal = ret_goal, portfolio_value= portfolio_value, time=time)
 
 

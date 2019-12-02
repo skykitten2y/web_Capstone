@@ -59,7 +59,7 @@
       responsive: true,
         title:{
           display:true,
-          text:'Asset Allocation For A Portfolio with Sharpe Ratio of {{sr}}',
+          text:'Asset Allocation For A Portfolio with Multi-period MVO',
           fontSize:25
         },
         legend:{
@@ -99,7 +99,7 @@
     Chart.defaults.global.defaultFontColor = '#777';
 
 
-   new Chart(document.getElementById("myChart2"), {
+ new Chart(document.getElementById("myChart2"), {
           type: 'line',
           data: {
             labels: [{% for item in time %}
@@ -109,13 +109,8 @@
                 data: [{% for item in portfolio_value %}
              "{{item}}",
             {% endfor %}],
-                label: "Portfolio Value",
+                label: "Portfolio Value with MVO",
                 borderColor: "#3e95cd",
-                fill: false
-              }, {
-                data: [100,110,120,130,140,150,160,170,180,190],
-                label: "S&P500",
-                borderColor: "#8e5ea2",
                 fill: false
               },
             ]
@@ -123,12 +118,10 @@
           options: {
             title: {
               display: true,
-              text: '                      '
+              text: '                 '
             }
           }
         });
-
-
 
 
   </script>
@@ -144,7 +137,7 @@
                             <i class="fa fa-rocket"></i>
                             <h3>Portfolio Weights</h3>
                             <hr>
-                            <p>The portfolio weights are shown in the pie chart. You can move your mouse on the specific section to see the related numbers of the weights.</p>
+                            <p>The portfolio weights are shown in the pie chart. You can move your mouse on the specific section to see the weights of the portfolio.</p>
                         </div>
                     </div>
 

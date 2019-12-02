@@ -9,7 +9,7 @@ from arch import arch_model
 from statsmodels.tsa.arima_model import ARIMA
 
 
-def thirdfunction (price_data,num_asset,inv_time,reb_time,return_goal):
+def thirdfunction (price_data,num_asset,inv_time,reb_time,risk_measure, return_goal):
 
     price_parsed = price_data
 
@@ -22,7 +22,7 @@ def thirdfunction (price_data,num_asset,inv_time,reb_time,return_goal):
     totalperiod = investment_time / rebalancing
 
 
-    return_goal = float(return_goal)
+    return_goal = float(return_goal)/100
 
     flt = float(0)
 
@@ -65,16 +65,29 @@ def thirdfunction (price_data,num_asset,inv_time,reb_time,return_goal):
         for j in range(100):
             mumatrix[i*100+j] = predictedmu[j][i]
 
+    lamda = 0.12 * (float(risk_measure) / 2.2361)
+
+    Amatrix = np.zeros((100 * int(totalperiod), 100 * int(totalperiod)))
+    for i in range(int(totalperiod)):
+        for j in range(100):
+
+            if lamda * (1 - (1 / (30 / rebalancing) * i)) >= 0:
+                Amatrix[i * 100 + j, i * 100 + j] = lamda * (1 - (1 / (30 / rebalancing) * i))
+            else:
+                Amatrix[i * 100 + j, i * 100 + j] = 0
+
+    qmatrix = mumatrix.T @ Amatrix
 
     mumatrix_mat = np.zeros((int(totalperiod), 100 * int(totalperiod)))
     for i in range(int(totalperiod)):
         for j in range(100):
-            mumatrix_mat[i,i*100+j] = mumatrix[i*100+j]
-
+            mumatrix_mat[i, i * 100 + j] = mumatrix[i * 100 + j]
 
     return_goal_mat = np.zeros((int(totalperiod)))
     for i in range(int(totalperiod)):
-        return_goal_mat[i] = ((1+return_goal) ** (1/totalperiod)) - 1
+        return_goal_mat[i] = ((1 + return_goal) ** (1 / totalperiod)) - 1
+
+
 
     cmatrix = np.ones((100*(int(totalperiod)-1),1))*0.5  #####need to specify c (0.5)
 
@@ -111,7 +124,7 @@ def thirdfunction (price_data,num_asset,inv_time,reb_time,return_goal):
     z1 = cp.Variable(100*(int(totalperiod)-1))    ### 1 to T-1
 
 
-    prob = cp.Problem(cp.Minimize(cp.quad_form(x,Qmatrix) + cmatrix.T@z1),
+    prob = cp.Problem(cp.Minimize(cp.quad_form(x,Qmatrix) -qmatrix@x + cmatrix.T@z1),
                       [z <= z1,
                        -z <= z1,
                        onematrix@z == zeromatrix,
@@ -119,7 +132,8 @@ def thirdfunction (price_data,num_asset,inv_time,reb_time,return_goal):
                        onemat3.T@y == num_asset_parsed,
                        x <= onemat4@y,
                        onemat5.T@x == float(1),
-                       mumatrix_mat@x >= return_goal_mat])
+                       mumatrix_mat@x >= return_goal_mat
+                       ])
 
     prob.solve()
     weight = x.value
