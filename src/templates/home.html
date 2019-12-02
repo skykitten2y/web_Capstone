@@ -79,7 +79,7 @@
                             <i class="fa fa-rocket"></i>
                             <h3>Existing Portfolio</h3>
                             <hr>
-                            <p>The user would provide desired stocks and related weights. The first function would provide return and risk profile of a given portfolio. In order to achieve this function, Fama-French 5 factors model is used to back test the past stock price to determine the expected rate of return and volatility.</p>
+                            <p>The first function provides the return and risk profile of a portfolio given by the user, with specific weights and stocks. In order to complete this function, Fama-French 5 factors model is used to estimate the past returns and volatility of stocks in order to back test the portfolio rate of return and volatility.</p>
                         </div>
                     </div>
 
@@ -88,7 +88,7 @@
                             <i class="fa fa-rocket"></i>
                             <h3>Without Target Return</h3>
                             <hr>
-                            <p> The second function of Robo-Advisor is to provide an optimal portfolio without any given goals.  Mean-Variance Optimization is implemented under Multi Period Framework to provide the optimal portfolio which will span the user’s entire investment horizon with given rebalancing period.  As MultiPeriod Framework allows us to take the future stock returns into account so that we could provide a better portfolio.  Thus, future stock returns and volatilities will be computed by GARCH in order to implement this model.</p>
+                            <p> The second function of Robo-Advisor provides an optimal portfolio without any given goals.  Mean-Variance Optimization is implemented under a multi-period framework to provide the optimal portfolio which will span the user’s entire investment horizon with given rebalancing frequency.  The multi-period framework allows us to take the future stock returns into account so that a better portfolio can be provided. Thus, future stock returns and volatilities will be computed by ARIMA and GARCH in order to implement this model.</p>
                         </div>
                     </div>
 
@@ -97,7 +97,7 @@
                             <i class="fa fa-rocket"></i>
                             <h3>With Target Return</h3>
                             <hr>
-                            <p>The  third  function  is  to  provide  an  optimal  portfolio  with  given  return  goal.  The  same processes are used as the second function.</p>
+                            <p>The  third  function  is  to  provide  an  optimal  portfolio  with a  given  return  goal.  The  same processes are used as the second function.</p>
                         </div>
                     </div>
 
