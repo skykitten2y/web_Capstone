@@ -498,7 +498,7 @@ def store_investor_expected_return():
     rebalance = float(reb_time)
     totalperiod = int(investmenthorizon / rebalance)
     # store rw and output it here
-    weight,weights = thirdfunction(price_data, num_asset, inv_time, reb_time, rw, return_goal)
+    weight,weightr = thirdfunction(price_data, num_asset, inv_time, reb_time, rw, return_goal)
 
     stock = []
     stockr = []
