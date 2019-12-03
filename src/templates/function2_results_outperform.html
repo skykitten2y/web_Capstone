@@ -177,7 +177,9 @@
     </div>
 
 
-<div>gp: {{given_portfolio}}</div>
+<div>gp: [{% for item in given_portfolio %}
+             "{{item}}",
+            {% endfor %}]</div>
 
 
 
