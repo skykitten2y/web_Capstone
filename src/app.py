@@ -217,9 +217,74 @@ def confirm_survey():
 def portfolio_options():
     if (session.get('answer_q16', None) == "Get the risk and return profile for given portfolio"):
         return render_template("given_portfolio_ask.html")
+
     elif (session.get('answer_q16', None) == "Get the optimal portfolio without return"):
+        return render_template("function2_input_portfolio.html")
+
+    elif (session.get('answer_q16', None) == "Get the optimal portfolio with return"):
+        return render_template("portfolio_with_return_ask.html")
+    else:
+        pass
+
+@app.route('/existing_portfolio',methods = ['POST'])
+def existing_portfolio_options():
+    e_answer_q16 = request.form.get('e_q16')
+
+    if (e_answer_q16 == "Get the risk and return profile for given portfolio"):
+        return render_template("given_portfolio_ask.html") #given_portfolio_ask.thml
+    elif (e_answer_q16 == "Get the optimal portfolio without return"):
+        return render_template("function2_input_portfolio.html")
+    elif (e_answer_q16 == "Get the optimal portfolio with return"):
+        return render_template("portfolio_with_return_ask.html")
+    else:
+        pass
+
+@app.route('/portfolio/input_weight_enhance',methods=['POST'])
+def input_weight_enhance():
+    input_portfolio_2 = request.form.getlist('input_portfolio_2')
+    session['input_portfolio_2'] = request.form.getlist('input_portfolio_2')
+    return render_template("function2_input_portfolio_weights.html", input_portfolio_2 = input_portfolio_2)
+
+@app.route('/function2_confirm',methods=['POST'])
+def function2_input_confirm_portfolio():
+    input_weight_2 = request.form.get('input_weight_2')
+    input_weight_2 = input_weight_2.split(",")
+    input_portfolio_2 = session.get('input_portfolio_2',None)
+
+    input_backtest_period_2 = request.form.get('input_backtest_period_2')
+    if (input_backtest_period_2 == ""):
+        input_backtest_period_2 = 10
+    session['input_backtest_period_2'] = input_backtest_period_2
+
+    temp= 0
+    given_portfolio_2 = {}
+    for i in input_portfolio_2:
+        given_portfolio_2[i]= float(input_weight_2[temp])
+        temp = temp + 1
+
+    session['given_portfolio_2'] = given_portfolio_2
+
+
+    updated_survey = Database.find_one("surveys", {"email":session.get('email',None)})
+    updated_survey["given_portfolio"]= given_portfolio_2
+    Database.replace_data('surveys',{"email":session.get('email',None)}, updated_survey)
+
+
+    return render_template("function2_given_portfolio_results.html", input_portfolio_2 = input_portfolio_2,input_weight_2=input_weight_2,given_portfolio_2=given_portfolio_2)
+
+
+
+
+
+
+@app.route('/function2_results',methods=['POST'])
+def function2_results():
         price_data = Database.extract_prices()
         riskfree = 0.0018
+
+        # It is here!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
+        # !!!!!!!!!!!!!!!!!11
+        # !!
 
         given_portfolio = Database.find_one("surveys", {"email": session.get('email', None)})['given_portfolio']
 
@@ -335,145 +400,10 @@ def portfolio_options():
         if (sr >= sp500_sr_input):
             return render_template("function2_results_outperform.html", time=time, portfolio_value=portfolio_value, portfolio_valuer=portfolio_valuer,
                                    weight=weights, stock=stock, sr=sr, inv_time=inv_time,
-                                   sp500_sr_input=round(sp500_sr_input, 2), given_portfolio = num_asset)
+                                   sp500_sr_input=round(sp500_sr_input, 2))
         else:
             return render_template("function2_results_underperform.html", weight=weights, stock=stock, sr=sr, portfolio_valuer=portfolio_valuer,
                                    inv_time=inv_time, sp500_sr_input=round(sp500_sr_input, 2), time=time, portfolio_value=portfolio_value)
-
-    elif (session.get('answer_q16', None) == "Get the optimal portfolio with return"):
-        return render_template("portfolio_with_return_ask.html")
-    else:
-        pass
-
-@app.route('/existing_portfolio',methods = ['POST'])
-def existing_portfolio_options():
-    e_answer_q16 = request.form.get('e_q16')
-
-    if (e_answer_q16 == "Get the risk and return profile for given portfolio"):
-        return render_template("given_portfolio_ask.html") #given_portfolio_ask.thml
-    elif (e_answer_q16 == "Get the optimal portfolio without return"):
-        price_data = Database.extract_prices()
-        riskfree = 0.0018
-
-        num_asset = Database.find_one("surveys", {"email": session.get('email', None)})['num_asset']
-        inv_time = Database.find_one("surveys", {"email": session.get('email', None)})['inv_time']
-        reb_time = Database.find_one("surveys", {"email": session.get('email', None)})['reb_time']
-        rw = Database.find_one("surveys", {"email": session.get('email', None)})['risk_measure']
-
-        investmenthorizon = float(inv_time)
-        rebalance = float(reb_time)
-        totalperiod = int(investmenthorizon / rebalance)
-        # store rw and output it here
-        weight,weightr = secondfunction(price_data, int(num_asset), inv_time,
-                                reb_time, float(rw))
-
-
-        stock = []
-        stockr = []
-        weights = []
-        weightsr = []
-
-        currentweight = weight[0:100]
-        currentweightr = weightr[0:100]
-
-        ####### get the current portfolio
-        portfolio = {}
-        temp = 0
-        for key in price_data.keys():
-            portfolio[key] = currentweight[temp]
-            temp = temp + 1
-
-        for key in portfolio.keys():
-            if portfolio[key] != 0:
-                stock.append(key)
-                weights.append(portfolio[key])
-
-        portfolior = {}
-        tempr = 0
-        for key in price_data.keys():
-            portfolior[key] = currentweightr[tempr]
-            tempr = tempr + 1
-
-        for keyr in portfolior.keys():
-            if portfolior[keyr] != 0:
-                stockr.append(keyr)
-                weightsr.append(portfolior[keyr])
-
-        initial_portfolio_value = 100
-        initial_portfolio_valuer = 100
-        portfolio_value = []
-        portfolio_valuer = []
-        portfolio_value.append(initial_portfolio_value)
-        portfolio_valuer.append(initial_portfolio_valuer)
-
-        l = []
-        for key in price_data.keys():
-            l.append(key)
-        totalreturn = {}
-        for i in l:
-            ret = []
-            for j in range(len(price_data[i]) - 1):
-                ret.append(price_data[i][j + 1] / price_data[i][j])
-
-            totalreturn[i] = ret
-
-        totalreturn_list = []
-        for i in range(20):
-            for key in totalreturn.keys():
-                totalreturn_list.append(totalreturn[key][i])
-
-        if totalperiod > 20:
-            totalperiod = 20
-
-        for i in range(totalperiod):
-            port_val = weight[i * 100:(i + 1) * 100].T @ totalreturn_list[
-                                                         i * 100:(i + 1) * 100] * initial_portfolio_value
-
-            port_valr = weightr[i * 100:(i + 1) * 100].T @ totalreturn_list[
-                                                         i * 100:(i + 1) * 100] * initial_portfolio_valuer
-            portfolio_value.append(port_val)
-            portfolio_valuer.append(port_valr)
-            initial_portfolio_value = port_val
-            initial_portfolio_valuer = port_valr
-
-        time = []
-        for i in range(totalperiod):
-            time.append(i*0.5)
-        time.append(totalperiod * 0.5)
-
-        portfolio_return_list = []
-        for i in range(len(portfolio_value) - 1):
-            portfolio_return_list.append((portfolio_value[i + 1] - portfolio_value[i]) / portfolio_value[i])
-
-        portfolio_return = geomean(portfolio_return_list)
-        portfolio_var = np.var(portfolio_return_list)
-        port_sharpe_ratio = (portfolio_return - riskfree) / np.sqrt(portfolio_var)
-
-
-
-        sr = round(port_sharpe_ratio,2) # input sharpe ratio from portfolio
-
-        # sp500_sr_1y = 5.4
-        # sp500_sr_3y = 1.07
-        # sp500_sr_5y = 0.83
-        # sp500_sr_10y = 1.04
-        sp500_sr_input = 0
-        if (float(inv_time) <= 3):
-            sp500_sr_input = 5.4 - ((5.4 - 1.07) / (3 - 1)) * (float(inv_time) - 1)
-        elif (float(inv_time) >= 10):
-            sp500_sr_input = 1.07 - ((1.07 - 0.89) / (5 - 3)) * (float(inv_time) - 3)
-        else:
-            sp500_sr_input = 0.89 + ((0.89 - 1.04) / (10 - 5)) * (float(inv_time) - 5)
-
-        if(sr>=sp500_sr_input):
-            return render_template("function2_results_outperform.html", time = time, portfolio_value = portfolio_value, portfolio_valuer=portfolio_valuer, weight=weights, stock=stock, sr=sr, inv_time = inv_time, sp500_sr_input=round(sp500_sr_input,2))
-        else:
-            return render_template("function2_results_underperform.html", weight=weights, stock=stock, sr=sr, inv_time = inv_time, sp500_sr_input=round(sp500_sr_input,2), portfolio_valuer=portfolio_valuer,  portfolio_value=portfolio_value, time=time)
-
-    elif (e_answer_q16 == "Get the optimal portfolio with return"):
-        return render_template("portfolio_with_return_ask.html")
-    else:
-        pass
 
 
 
@@ -610,9 +540,6 @@ def store_investor_expected_return():
 @app.route('/portfolio/input_weight_portfolio',methods=['POST'])
 def input_weight_portfolio():
     input_portfolio = request.form.getlist('input_portfolio')
-
-
-
     session['input_portfolio'] = request.form.getlist('input_portfolio')
     return render_template("given_portfolio_ask_weights.html", input_portfolio = input_portfolio)
 
@@ -622,12 +549,10 @@ def input_confirm_portfolio():
     input_weight = request.form.get('input_weight')
     input_weight = input_weight.split(",")
     input_portfolio = session.get('input_portfolio',None)
-
     input_backtest_period = request.form.get('input_backtest_period')
     if (input_backtest_period == ""):
         input_backtest_period = 10
     session['input_backtest_period'] = input_backtest_period
-
 
     temp= 0
     given_portfolio = {}
@@ -653,9 +578,6 @@ def function1_results():
     time = float(session.get('input_backtest_period',None))
     price_data= Database.extract_prices()
     factor_data= Database.extract_factors()
-
-
-
 
 
     riskfree = 0.0018
