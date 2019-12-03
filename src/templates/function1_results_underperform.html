@@ -38,7 +38,12 @@
         <h3>SP500's Sharpe Ratio for {{time}} years:  {{sp500_sr_input}}</h3>
         <h3>Comments: </h3> <p> Your portfolio has underperformed SP500 for the past {{time}} years. Don't worry! You can explore the other two functions the application has offered, and we can provide you a better portfolio.</p>
     </div>
-
+    &nbsp
+    <div class="text-center" id="add-stock-form">
+        <form id = "choose_another_function" action="/existing_choose_function" method="post">
+             <button type="submit" class="btn btn-primary">Choose Another Function</button>
+        </form>
+    </div>
 
 
 
