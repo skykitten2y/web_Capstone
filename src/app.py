@@ -335,7 +335,7 @@ def portfolio_options():
         if (sr >= sp500_sr_input):
             return render_template("function2_results_outperform.html", time=time, portfolio_value=portfolio_value, portfolio_valuer=portfolio_valuer,
                                    weight=weights, stock=stock, sr=sr, inv_time=inv_time,
-                                   sp500_sr_input=round(sp500_sr_input, 2), given_portfolio = given_portfolio)
+                                   sp500_sr_input=round(sp500_sr_input, 2), given_portfolio = num_asset)
         else:
             return render_template("function2_results_underperform.html", weight=weights, stock=stock, sr=sr, portfolio_valuer=portfolio_valuer,
                                    inv_time=inv_time, sp500_sr_input=round(sp500_sr_input, 2), time=time, portfolio_value=portfolio_value)
