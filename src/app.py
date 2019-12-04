@@ -258,7 +258,7 @@ def existing_portfolio_options():
         for keys in input_portfolio.keys():
             weights.append(input_portfolio[keys])
 
-        for i in stocks:
+        for i in range(len(stocks)):
             portfolio.append(stocks[i])
             portfolio.append(weights[i])
 
