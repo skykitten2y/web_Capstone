@@ -33,7 +33,11 @@
 
 
         <h2>Your portfolio is:</h2>
-
+        <ul style="list-style-type:none;">
+            {% for item in input_portfolio %}
+             {{item}},
+            {% endfor %}
+        </ul>
 
 
 
