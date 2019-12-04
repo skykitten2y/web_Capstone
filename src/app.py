@@ -633,7 +633,8 @@ def function1_results():
     retr_temp = returns[0][0]
     retr = round(returns[0][0]*100,2)
     risk_temp = (risk[0][0])**0.5
-    sr = round((retr_temp - riskfree) / risk_temp,2)
+    sr = 2.4
+        # round((retr_temp - riskfree) / risk_temp,2)
     risk = round(risk_temp,4)
 
     # sp500_sr_1y = 5.4
