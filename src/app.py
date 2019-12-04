@@ -232,12 +232,29 @@ def existing_portfolio_options():
 
     if (e_answer_q16 == "Get the risk and return profile for given portfolio"):
         input_portfolio = Database.find_one("surveys", {"email": session.get('email', None)})['given_portfolio']
+        stocks = []
+        weights = []
 
-        return render_template("given_portfolio_ask.html", input_portfolio = input_portfolio) #given_portfolio_ask.thml
+        for keys in input_portfolio:
+            stocks[keys] = input_portfolio[keys]
+
+        for values in input_portfolio:
+            weights[values] = input_portfolio[values]
+
+
+        return render_template("given_portfolio_ask.html", stocks=stocks, weights= weights) #given_portfolio_ask.thml
     elif (e_answer_q16 == "Get the optimal portfolio without return"):
         input_portfolio = Database.find_one("surveys", {"email": session.get('email', None)})['given_portfolio']
+        stocks = []
+        weights = []
 
-        return render_template("function2_input_portfolio.html" ,input_portfolio = input_portfolio)
+        for keys in input_portfolio:
+            stocks[keys] = input_portfolio[keys]
+
+        for values in input_portfolio:
+            weights[values] = input_portfolio[values]
+
+        return render_template("function2_input_portfolio.html" ,stocks=stocks, weights= weights)
     elif (e_answer_q16 == "Get the optimal portfolio with return"):
         return render_template("portfolio_with_return_ask.html")
     else:
