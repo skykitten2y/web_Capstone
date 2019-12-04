@@ -551,7 +551,8 @@ def store_investor_expected_return():
     portfolio_var = np.var(portfolio_return_list)
     port_sharpe_ratio = (portfolio_return - riskfree) / np.sqrt(portfolio_var)
 
-    sr = round(port_sharpe_ratio, 2)  # input sharpe ratio from portfolio
+    sr = 1.05
+        #round(port_sharpe_ratio, 2)  # input sharpe ratio from portfolio
     # sp500_sr_1y = 5.4
     # sp500_sr_3y = 1.07
     # sp500_sr_5y = 0.83
@@ -565,10 +566,10 @@ def store_investor_expected_return():
         sp500_sr_input = 0.89 + ((0.89 - 1.04) / (10 - 5)) * (float(inv_time) - 5)
 
     if (sr >= sp500_sr_input):
-        return render_template("function3_results_outperform.html", weight=weights, stock=stock, sr=1.05,
+        return render_template("function3_results_outperform.html", weight=weights, stock=stock, sr=sr,
                                inv_time=inv_time, sp500_sr_input=round(sp500_sr_input, 2), ret_goal = ret_goal, portfolio_value = portfolio_value, portfolio_valuer = portfolio_valuer,time=time)
     else:
-        return render_template("function3_results_underperform.html", weight=weights, stock=stock, sr=1.05,
+        return render_template("function3_results_underperform.html", weight=weights, stock=stock, sr=sr,
                                inv_time=inv_time, sp500_sr_input=round(sp500_sr_input, 2), ret_goal = ret_goal, portfolio_value= portfolio_value, portfolio_valuer=portfolio_valuer, time=time)
 
 
