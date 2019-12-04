@@ -33,12 +33,12 @@
     let massPopChart = new Chart(myChart, {
       type:'pie', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
       data:{
-        labels:[{% for item in input_portfolio_2 %}
+        labels:[{% for item in input_portfolio %}
              "{{item}}",
             {% endfor %}],
         datasets:[{
           label:'Population',
-          data:[{% for item in input_weight_2 %}
+          data:[{% for item in input_weight %}
              "{{item}}",
             {% endfor %}],
           //backgroundColor:'green',
