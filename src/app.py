@@ -235,12 +235,11 @@ def existing_portfolio_options():
         stocks = []
         weights = []
 
-        for keys in input_portfolio:
-            stocks[keys] = input_portfolio[keys]
+        for keys in input_portfolio.keys():
+            stocks.append(keys)
 
-        for values in input_portfolio:
-            weights[values] = input_portfolio[values]
-
+        for keys in input_portfolio.keys():
+            weights.append(input_portfolio[keys])
 
         return render_template("given_portfolio_ask.html", stocks=stocks, weights= weights) #given_portfolio_ask.thml
     elif (e_answer_q16 == "Get the optimal portfolio without return"):
@@ -248,11 +247,11 @@ def existing_portfolio_options():
         stocks = []
         weights = []
 
-        for keys in input_portfolio:
-            stocks[keys] = input_portfolio[keys]
+        for keys in input_portfolio.keys():
+            stocks.append(keys)
 
-        for values in input_portfolio:
-            weights[values] = input_portfolio[values]
+        for keys in input_portfolio.keys():
+            weights.append(input_portfolio[keys])
 
         return render_template("function2_input_portfolio.html" ,stocks=stocks, weights= weights)
     elif (e_answer_q16 == "Get the optimal portfolio with return"):
