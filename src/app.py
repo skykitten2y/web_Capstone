@@ -551,8 +551,7 @@ def store_investor_expected_return():
     portfolio_var = np.var(portfolio_return_list)
     port_sharpe_ratio = (portfolio_return - riskfree) / np.sqrt(portfolio_var)
 
-    sr = 1.05
-        #round(port_sharpe_ratio, 2)  # input sharpe ratio from portfolio
+    sr = round(port_sharpe_ratio, 2)  # input sharpe ratio from portfolio
     # sp500_sr_1y = 5.4
     # sp500_sr_3y = 1.07
     # sp500_sr_5y = 0.83
