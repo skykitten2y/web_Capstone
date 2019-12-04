@@ -228,9 +228,7 @@ def portfolio_options():
 
 @app.route('/existing_portfolio',methods = ['POST'])
 def existing_portfolio_options():
-
     e_answer_q16 = request.form.get('e_q16')
-    session['e_answer_q16'] = e_answer_q16
 
     if (e_answer_q16 == "Get the risk and return profile for given portfolio"):
         input_portfolio = Database.find_one("surveys", {"email": session.get('email', None)})['given_portfolio']
@@ -249,8 +247,7 @@ def existing_portfolio_options():
 
 
         return render_template("given_portfolio_ask.html", portfolio=portfolio) #given_portfolio_ask.thml
-
-    elif (e_answer_q16 == "Enhance the existing portfolio"):
+    elif (e_answer_q16 == "Get the optimal portfolio without return"):
         input_portfolio = Database.find_one("surveys", {"email": session.get('email', None)})['given_portfolio']
         stocks = []
         weights = []
@@ -265,8 +262,8 @@ def existing_portfolio_options():
             portfolio.append(stocks[i])
             portfolio.append(weights[i])
 
-        return render_template("function2_input_portfolio.html" ,portfolio = portfolio)
 
+        return render_template("function2_input_portfolio.html" ,portfolio = portfolio)
     elif (e_answer_q16 == "Get the optimal portfolio with return"):
         return render_template("portfolio_with_return_ask.html")
     else:
@@ -587,65 +584,37 @@ def input_weight_portfolio():
 # add
 @app.route('/portfolio/input_portfolio_confirm',methods=['POST'])
 def input_confirm_portfolio():
-    if(session.get('e_answer_q16_',None) == "Enhance the existing portfolio"):
-        input_weight = request.form.get('input_weight')
-        input_weight = input_weight.split(",")
-        input_portfolio = session.get('input_portfolio', None)
+    input_weight = request.form.get('input_weight')
+    input_weight = input_weight.split(",")
+    input_portfolio = session.get('input_portfolio',None)
+    input_backtest_period = request.form.get('input_backtest_period')
+    if (input_backtest_period == ""):
+        input_backtest_period = 10
 
-        input_backtest_period = request.form.get('input_backtest_period_2')
-        if (input_backtest_period == ""):
-            input_backtest_period = 10
-        session['input_backtest_period'] = input_backtest_period
+    # session['input_backtest_period'] = input_backtest_period
 
-        temp = 0
-        given_portfolio = {}
-        for i in input_portfolio:
-            given_portfolio[i] = float(input_weight[temp])
-            temp = temp + 1
-
-        session['given_portfolio'] = given_portfolio
-
-        updated_survey = Database.find_one("surveys", {"email": session.get('email', None)})
-        updated_survey["given_portfolio"] = given_portfolio
-        Database.replace_data('surveys', {"email": session.get('email', None)}, updated_survey)
-
-        return render_template("function2_given_portfolio_results.html", input_portfolio=input_portfolio,
-                               input_weight=input_weight, given_portfolio=given_portfolio)
-
-
-    else:
-
-        input_weight = request.form.get('input_weight')
-        input_weight = input_weight.split(",")
-        input_portfolio = session.get('input_portfolio',None)
-        input_backtest_period = request.form.get('input_backtest_period')
-        if (input_backtest_period == ""):
-            input_backtest_period = 10
-
-        # session['input_backtest_period'] = input_backtest_period
-
-        updated_survey = Database.find_one("surveys", {"email": session.get('email', None)})
-        updated_survey['back_time'] = int(input_backtest_period)
-        Database.replace_data('surveys', {"email": session.get('email', None)}, updated_survey)
+    updated_survey = Database.find_one("surveys", {"email": session.get('email', None)})
+    updated_survey['back_time'] = int(input_backtest_period)
+    Database.replace_data('surveys', {"email": session.get('email', None)}, updated_survey)
 
 
 
 
-        temp= 0
-        given_portfolio = {}
-        for i in input_portfolio:
-            given_portfolio[i]= float(input_weight[temp])
-            temp = temp + 1
+    temp= 0
+    given_portfolio = {}
+    for i in input_portfolio:
+        given_portfolio[i]= float(input_weight[temp])
+        temp = temp + 1
 
-        session['given_portfolio'] = given_portfolio
-
-
-        updated_survey = Database.find_one("surveys", {"email":session.get('email',None)})
-        updated_survey["given_portfolio"]= given_portfolio
-        Database.replace_data('surveys',{"email":session.get('email',None)}, updated_survey)
+    session['given_portfolio'] = given_portfolio
 
 
-        return render_template("given_portfolio_results.html", input_portfolio = session.get('input_portfolio',None),input_weight=input_weight,given_portfolio=given_portfolio)
+    updated_survey = Database.find_one("surveys", {"email":session.get('email',None)})
+    updated_survey["given_portfolio"]= given_portfolio
+    Database.replace_data('surveys',{"email":session.get('email',None)}, updated_survey)
+
+
+    return render_template("given_portfolio_results.html", input_portfolio = session.get('input_portfolio',None),input_weight=input_weight,given_portfolio=given_portfolio)
 
 
 
