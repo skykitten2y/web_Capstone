@@ -231,9 +231,13 @@ def existing_portfolio_options():
     e_answer_q16 = request.form.get('e_q16')
 
     if (e_answer_q16 == "Get the risk and return profile for given portfolio"):
-        return render_template("given_portfolio_ask.html") #given_portfolio_ask.thml
+        input_portfolio = Database.find_one("surveys", {"email": session.get('email', None)})['given_portfolio']
+
+        return render_template("given_portfolio_ask.html", input_portfolio = input_portfolio) #given_portfolio_ask.thml
     elif (e_answer_q16 == "Get the optimal portfolio without return"):
-        return render_template("function2_input_portfolio.html")
+        input_portfolio = Database.find_one("surveys", {"email": session.get('email', None)})['given_portfolio']
+
+        return render_template("function2_input_portfolio.html" ,input_portfolio = input_portfolio)
     elif (e_answer_q16 == "Get the optimal portfolio with return"):
         return render_template("portfolio_with_return_ask.html")
     else:
@@ -280,6 +284,7 @@ def function2_input_confirm_portfolio():
 @app.route('/function2_results',methods=['POST'])
 def function2_results():
         price_data = Database.extract_prices()
+        factor_data = Database.extract_factors()
         riskfree = 0.0018
 
         # It is here!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
@@ -391,12 +396,13 @@ def function2_results():
         # sp500_sr_5y = 0.83
         # sp500_sr_10y = 1.04
         sp500_sr_input = 0
-        if (float(inv_time) <= 3):
-            sp500_sr_input = 5.4 - ((5.4 - 1.07) / (3 - 1)) * (float(inv_time) - 1)
-        elif (float(inv_time) >= 10):
-            sp500_sr_input = 1.07 - ((1.07 - 0.89) / (5 - 3)) * (float(inv_time) - 3)
-        else:
-            sp500_sr_input = 0.89 + ((0.89 - 1.04) / (10 - 5)) * (float(inv_time) - 5)
+
+        returns, risk = firstfunction(given_portfolio, price_data, factor_data, int(investmenthorizon))
+        retr_temp = returns[0][0]
+        retr = round(returns[0][0] * 100, 2)
+        risk_temp = (risk[0][0]) ** 0.5
+        sp500_sr_input = round((retr_temp - riskfree) / risk_temp, 2)
+
 
         if (sr >= sp500_sr_input):
             return render_template("function2_results_outperform.html", time=time, portfolio_value=portfolio_value, portfolio_valuer=portfolio_valuer,
@@ -600,7 +606,7 @@ def function1_results():
     returns, risk = firstfunction(given_portfolio, price_data, factor_data, time)
     retr_temp = returns[0][0]
     retr = round(returns[0][0]*100,2)
-    risk_temp = risk[0][0]
+    risk_temp = (risk[0][0])**0.5
     sr = round((retr_temp - riskfree) / risk_temp,2)
     risk = round(risk_temp,4)
 

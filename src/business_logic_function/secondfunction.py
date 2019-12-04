@@ -40,6 +40,7 @@ def secondfunction (price_data,num_asset,inv_time,reb_time,risk_measure,given_po
         else:
             x_temp.append(float(0))
 
+### given portfolio from users
     x_u = np.zeros((100))
     for i in range(len(x_temp)):
         x_u[i] = x_temp[i]
@@ -243,7 +244,7 @@ def secondfunction (price_data,num_asset,inv_time,reb_time,risk_measure,given_po
 
     qmatrix = mumatrix.T@Amatrix
     cmatrix = np.ones((100*(int(totalperiod)-1),1))*0.5  #####need to specify c (0.5)
-
+    x_u = float(1)
     onematrix = np.zeros((int(totalperiod)-1, 100*(int(totalperiod)-1)))
     for i in range(int(totalperiod)-1):
         for j in range(100):
@@ -267,9 +268,9 @@ def secondfunction (price_data,num_asset,inv_time,reb_time,risk_measure,given_po
         for j in range(100):
             onemat4[i*100+j][j] = float(1)
 
-    onemat5 = np.zeros((100, 100*int(totalperiod)))
+    onemat5 = np.zeros((100*int(totalperiod)))
     for i in range(100):
-        onemat5[i][i]= float(1)
+        onemat5[i]= float(1)
 
     x = cp. Variable(100*int(totalperiod),nonneg=True)       ### 1 to T
     y = cp. Variable(100, boolean=True)
@@ -284,7 +285,7 @@ def secondfunction (price_data,num_asset,inv_time,reb_time,risk_measure,given_po
                        onemat1@x + z == onemat2@x,
                        onemat3.T@y == num_asset_parsed,
                        x <= onemat4@y,
-                       onemat5 @x == x_u])
+                       onemat5.T @x == x_u])
 
     prob.solve()
     weight = x.value
@@ -309,7 +310,7 @@ def secondfunction (price_data,num_asset,inv_time,reb_time,risk_measure,given_po
                         onemat1 @ xr + zr == onemat2 @ xr,
                         onemat3.T @ yr == num_asset_parsed,
                         xr <= onemat4 @ yr,
-                        onemat5 @ xr == x_u])
+                        onemat5.T @ xr == x_u])
 
     probr.solve()
     weightr = xr.value
