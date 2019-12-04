@@ -81,7 +81,12 @@ def thirdfunction (price_data,num_asset,inv_time,reb_time,risk_measure, return_g
     mumatrix_mat = np.zeros((int(totalperiod), 100 * int(totalperiod)))
     for i in range(int(totalperiod)):
         for j in range(100):
-            mumatrix_mat[i, i * 100 + j] = mumatrix[i * 100 + j] - (((Qmatrix[i*100+j, i*100+j]) ** (0.5)) * 0.43827)
+            mumatrix_mat[i, i * 100 + j] = mumatrix[i * 100 + j]
+
+    mumatrix_mat1 = np.zeros((int(totalperiod), 100 * int(totalperiod)))
+    for i in range(int(totalperiod)):
+        for j in range(100):
+            mumatrix_mat1[i, i * 100 + j] = mumatrix[i * 100 + j] - (((Qmatrix[i*100+j, i*100+j]) ** (0.5)) * 0.43827)
 
     return_goal_mat = np.zeros((int(totalperiod)))
     for i in range(int(totalperiod)):
@@ -156,7 +161,7 @@ def thirdfunction (price_data,num_asset,inv_time,reb_time,risk_measure, return_g
                         onemat3.T @ yr == num_asset_parsed,
                         xr <= onemat4 @ yr,
                         onemat5.T @ xr == float(1),
-                        mumatrix_mat @ x >= return_goal_mat
+                        mumatrix_mat1 @ xr >= return_goal_mat
                         ])
 
     probr.solve()
