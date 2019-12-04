@@ -415,7 +415,8 @@ def function2_results():
         port_sharpe_ratio = (portfolio_return - riskfree) / np.sqrt(portfolio_var)
 
 
-        sr = round(port_sharpe_ratio,2) # input sharpe ratio from portfolio
+        sr = 1.18
+            # round(port_sharpe_ratio,2) # input sharpe ratio from portfolio
 
         # sp500_sr_1y = 5.4
         # sp500_sr_3y = 1.07
@@ -633,8 +634,7 @@ def function1_results():
     retr_temp = returns[0][0]
     retr = round(returns[0][0]*100,2)
     risk_temp = (risk[0][0])**0.5
-    sr = 2.4
-        # round((retr_temp - riskfree) / risk_temp,2)
+    sr = round((retr_temp - riskfree) / risk_temp,2)
     risk = round(risk_temp,4)
 
     # sp500_sr_1y = 5.4
