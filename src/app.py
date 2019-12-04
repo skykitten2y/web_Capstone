@@ -594,7 +594,7 @@ def input_confirm_portfolio():
     # session['input_backtest_period'] = input_backtest_period
 
     updated_survey = Database.find_one("surveys", {"email": session.get('email', None)})
-    updated_survey['back_time'] = 5
+    updated_survey['back_time'] = input_backtest_period
     Database.replace_data('surveys', {"email": session.get('email', None)}, updated_survey)
 
 
