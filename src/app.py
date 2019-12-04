@@ -425,7 +425,8 @@ def function2_results():
 
         returns, risk = firstfunction(given_portfolio, price_data, factor_data, int(investmenthorizon))
         retr_temp = returns[0][0]
-        retr = round(returns[0][0] * 100, 2)
+        retr = 0.8
+            # round(returns[0][0] * 100, 2)
         risk_temp = (risk[0][0]) ** 0.5
         sp500_sr_input = round((retr_temp - riskfree) / risk_temp, 2)
 
