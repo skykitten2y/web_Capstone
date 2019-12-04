@@ -50,7 +50,7 @@
         if(x < max_fields){ //max input box allowed
 
 		     //text box increment
-            $(wrapper).append('<div class="form-group"><label for="input_stocks"><select class="selectpicker" name="input_portfolio_2" data-size="7" data-style="btn btn-primary btn-round" title="select" data-live-search="true">' +
+            $(wrapper).append('<div class="form-group"><label for="input_stocks"><select class="selectpicker" name="input_portfolio" data-size="7" data-style="btn btn-primary btn-round" title="select" data-live-search="true">' +
                                 '<optgroup label = "Technology">' +
                                 '<option value="AAPL">AAPL	Apple, Inc.</option>' +
                                 '<option value="MSFT">MSFT	Microsoft Corp. </option>' +
@@ -202,7 +202,11 @@
 
 });
 
-let myChart = document.getElementById('myChart').getContext('2d');
+
+
+
+
+    let myChart = document.getElementById('myChart').getContext('2d');
 
     // Global Options
     Chart.defaults.global.defaultFontFamily = 'Lato';
@@ -281,24 +285,19 @@ let myChart = document.getElementById('myChart').getContext('2d');
 
 
 
-
-
-
-
-
-
-
-
-
 </script>
-   <body>
+    <body>
 
 
     &nbsp;
     <div class="text-center" id="add-stock-form">
         <h2>Your Existing Portfolio is: </h2>
         <div>
-
+        <ul style="list-style-type:none;">
+            {% for item in portfolio %}
+             {{item}},
+            {% endfor %}
+        </ul>
 
 
             <form id = "next" action="/function2_results" method="post">
@@ -318,6 +317,3 @@ let myChart = document.getElementById('myChart').getContext('2d');
     </div>
     </body>
 </html>
-
-
-
