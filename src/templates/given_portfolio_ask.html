@@ -294,8 +294,15 @@
           <div class="container mb-2" style="position: relative; height:50vh; width:50vw">
             <canvas id="myChart" ></canvas>
           </div>
+        <div>
+    [{% for item in stocks %}
+             "{{item}}",
+            {% endfor %}]
 
-
+            [{% for item in weights %}
+             "{{item}}",
+            {% endfor %}]
+        </div>
 
             <form id = "next" action="/function1/results" method="post">
                 &nbsp
