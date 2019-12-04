@@ -7,7 +7,7 @@ class Survey(object):
     # need to get num_assets, inv_time, reb_time, risk_measure,return_goal (starting from answer_q_13, the info before is only for storage purpose)
 
     def __init__(self, email, gender, age, employment, house, car, education,income, protect, name,num_asset,inv_time,
-                 reb_time, risk_measure, ret_goal=None, given_portfolio=None, _id=None):  # set a default value for id to be none
+                 reb_time, risk_measure, back_time=None, ret_goal=None, given_portfolio=None, _id=None):  # set a default value for id to be none
         self.email = email
         self.gender = gender
         self.age = age
@@ -24,7 +24,7 @@ class Survey(object):
         self.risk_measure = risk_measure
         self.ret_goal = ret_goal
         self. given_portfolio = given_portfolio
-
+        self. back_time = back_time
 
 
     # def new_survey(self,  email, gender, age, employment, house, car, education,income, protect, name, phone, citizenship,num_assets,inv_time,
@@ -80,6 +80,6 @@ class Survey(object):
             'risk_measure':self.risk_measure,
             'ret_goal':self.ret_goal,
             'given_portfolio':self.given_portfolio,
-
+            'back_time':self.back_time
 
         }

@@ -287,6 +287,7 @@ def function2_results():
         # !!
 
         given_portfolio = Database.find_one("surveys", {"email": session.get('email', None)})['given_portfolio']
+        given_portfolio = {'AAPL':0.4,'MSFT':0.3,'AXP':0.3}
 
         num_asset = Database.find_one("surveys", {"email": session.get('email', None)})['num_asset']
         inv_time = Database.find_one("surveys", {"email": session.get('email', None)})['inv_time']
@@ -298,7 +299,7 @@ def function2_results():
         totalperiod = int(investmenthorizon / rebalance)
         # store rw and output it here
         weight,weightr = secondfunction(price_data, int(num_asset), inv_time,
-                                reb_time, float(rw))
+                                reb_time, float(rw),given_portfolio)
 
 
         stock = []
@@ -306,8 +307,8 @@ def function2_results():
         weights = []
         weightsr = []
 
-        currentweight = weight[0:100]
-        currentweightr = weightr[0:100]
+        currentweight = weight[100:200]
+        currentweightr = weightr[100:200]
 
         ####### get the current portfolio
         portfolio = {}
@@ -409,6 +410,10 @@ def function2_results():
 
 @app.route('/portfoilo/with_return',methods=['POST'])
 def store_investor_expected_return():
+    # #session['input_backtest_period'] = Database.find_one("surveys", {"email": session.get('email', None)})['inv_time']
+    # session['input_backtest_period'] = 5
+
+
     updated_survey = Database.find_one("surveys", {"email":session.get('email',None)})
     updated_survey["ret_goal"]= request.form.get('goal') #change 10 to user inputed return goal
     Database.replace_data('surveys',{"email":session.get('email',None)}, updated_survey)
@@ -541,6 +546,7 @@ def store_investor_expected_return():
 def input_weight_portfolio():
     input_portfolio = request.form.getlist('input_portfolio')
     session['input_portfolio'] = request.form.getlist('input_portfolio')
+
     return render_template("given_portfolio_ask_weights.html", input_portfolio = input_portfolio)
 
 # add
@@ -552,7 +558,15 @@ def input_confirm_portfolio():
     input_backtest_period = request.form.get('input_backtest_period')
     if (input_backtest_period == ""):
         input_backtest_period = 10
-    session['input_backtest_period'] = input_backtest_period
+
+    # session['input_backtest_period'] = input_backtest_period
+
+    updated_survey = Database.find_one("surveys", {"email": session.get('email', None)})
+    updated_survey['back_time'] = 5
+    Database.replace_data('surveys', {"email": session.get('email', None)}, updated_survey)
+
+
+
 
     temp= 0
     given_portfolio = {}
@@ -575,7 +589,9 @@ def input_confirm_portfolio():
 @app.route('/function1/results', methods=['GET', 'POST'])
 def function1_results():
     given_portfolio = session.get('given_portfolio', None)
-    time = float(session.get('input_backtest_period',None))
+
+    time = Database.find_one("surveys", {"email": session.get('email', None)})['back_time']
+
     price_data= Database.extract_prices()
     factor_data= Database.extract_factors()
 

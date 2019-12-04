@@ -233,17 +233,33 @@
 
 </script>
     <body>
-    <h2 class="text-center">Please add the candidate stocks for the portfolio </h2>
-    &nbsp;
-    <div class="text-center" id="add-stock-form">
+
+      <div class="text-center" id="add-stock-form">
+               <h2>Your portfolio is:</h2>
+            <ul style="list-style-type:none;">
+                {% for item in input_portfolio %}
+                 {{item}},
+                {% endfor %}
+            </ul>
+            <form id = "next" action="/function2_results" method="post">
+                &nbsp
+             <button type="submit" class="btn btn-primary">Use Existing Portfolio</button>
+             <h2 class="text-center">Or add a new portfolio with candidate stocks</h2>
+             </form>
         <form id = "add-stock-content" action="/portfolio/input_weight_enhance" method="post">
              <div class="input_fields_wrap">
                 <button class="add_field_button btn btn-primary">Add Stock</button>
              </div>
-             <button type="submit" class="btn btn-primary">Submit</button>
+             &nbsp
+             <button type="submit" class="btn btn-primary">Submit New Portfolio</button>
 
         </form>
     </div>
+
+
+
+
+
     </body>
 </html>
 

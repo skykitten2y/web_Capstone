@@ -7,7 +7,7 @@ import cvxpy as cp
 from arch import arch_model
 from statsmodels.tsa.arima_model import ARIMA
 
-def secondfunction (price_data,num_asset,inv_time,reb_time,risk_measure):
+def secondfunction (price_data,num_asset,inv_time,reb_time,risk_measure,given_portfolio):
 
     price_parsed = price_data
 
@@ -21,6 +21,35 @@ def secondfunction (price_data,num_asset,inv_time,reb_time,risk_measure):
     totalperiod = investment_time/rebalancing
 
     flt = float(0)
+
+    x_temp = []
+    ticker_list = []
+    count = 0
+    for key in given_portfolio.keys():
+        ticker_list.append(key)
+        count = count + 1
+
+    ticker100 = []
+    for key in price_parsed.keys():
+        ticker100.append(key)
+
+    for item in ticker100:
+        if item in ticker_list:
+            x_temp.append(given_portfolio[item])
+
+        else:
+            x_temp.append(float(0))
+
+    x_u = np.zeros((100))
+    for i in range(len(x_temp)):
+        x_u[i] = x_temp[i]
+
+
+    if count >= num_asset_parsed:
+        num_asset_parsed = count
+
+
+
 
     l = []
     for key in price_parsed.keys():
@@ -238,9 +267,9 @@ def secondfunction (price_data,num_asset,inv_time,reb_time,risk_measure):
         for j in range(100):
             onemat4[i*100+j][j] = float(1)
 
-    onemat5 = np.zeros((100*int(totalperiod),1))
+    onemat5 = np.zeros((100, 100*int(totalperiod)))
     for i in range(100):
-        onemat5[i] = float(1)
+        onemat5[i][i]= float(1)
 
     x = cp. Variable(100*int(totalperiod),nonneg=True)       ### 1 to T
     y = cp. Variable(100, boolean=True)
@@ -255,7 +284,7 @@ def secondfunction (price_data,num_asset,inv_time,reb_time,risk_measure):
                        onemat1@x + z == onemat2@x,
                        onemat3.T@y == num_asset_parsed,
                        x <= onemat4@y,
-                       onemat5.T@x == float(1)])
+                       onemat5 @x == x_u])
 
     prob.solve()
     weight = x.value
@@ -280,7 +309,7 @@ def secondfunction (price_data,num_asset,inv_time,reb_time,risk_measure):
                         onemat1 @ xr + zr == onemat2 @ xr,
                         onemat3.T @ yr == num_asset_parsed,
                         xr <= onemat4 @ yr,
-                        onemat5.T @ xr == float(1)])
+                        onemat5 @ xr == x_u])
 
     probr.solve()
     weightr = xr.value
