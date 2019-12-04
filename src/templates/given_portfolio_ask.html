@@ -32,7 +32,7 @@
 	<script>
 
 
-    function myfunction()
+    $(document).ready(function_1() {
     {
      let myChart = document.getElementById('myChart').getContext('2d');
 
@@ -319,7 +319,7 @@
              "{{item}}",
             {% endfor %}]
         </div>
-            <button type="submit" class="btn btn-primary" onclick = "myfunction()">Show Existing Portfolio</button>
+            <button type="submit" class="btn btn-primary" onclick = "function_1()">Show Existing Portfolio</button>
             <form id = "next" action="/function1/results" method="post">
 
 
