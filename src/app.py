@@ -243,7 +243,7 @@ def existing_portfolio_options():
 
         for i in range(len(stocks)):
             portfolio.append(stocks[i])
-            portfolio.append[weights[i]]
+            portfolio.append(weights[i])
 
 
         return render_template("given_portfolio_ask.html", portfolio=portfolio) #given_portfolio_ask.thml
@@ -260,7 +260,7 @@ def existing_portfolio_options():
 
         for i in stocks:
             portfolio.append(stocks[i])
-            portfolio.append[weights[i]]
+            portfolio.append(weights[i])
 
 
         return render_template("function2_input_portfolio.html" ,portfolio = portfolio)
