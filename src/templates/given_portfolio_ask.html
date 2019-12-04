@@ -30,10 +30,6 @@
 
 
 	<script>
-
-
-    $(document).ready(function_1() {
-    {
      let myChart = document.getElementById('myChart').getContext('2d');
 
         // Global Options
@@ -95,15 +91,22 @@
           }
         });
 
-    }
 
 
+    </script>
+    <body>
+
+        <div class="text-center" id="add-stock-form">
+          <div class="container mb-2" style="position: relative; height:50vh; width:50vw">
+
+            <canvas id="myChart" ></canvas>
+          </div>
+
+        </div>
+    </body>
 
 
-
-
-
-
+    <script>
 
     $(document).ready(function() {
       $('.selectpicker').selectpicker({
@@ -275,29 +278,6 @@
 
 
 });
-	
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 </script>
@@ -305,21 +285,8 @@
 
 
     &nbsp;
-    <div class="text-center" id="add-stock-form">
-          <div class="container mb-2" style="position: relative; height:50vh; width:50vw">
 
-            <canvas id="myChart" ></canvas>
-          </div>
-        <div>
-    [{% for item in stocks %}
-             "{{item}}",
-            {% endfor %}]
 
-            [{% for item in weights %}
-             "{{item}}",
-            {% endfor %}]
-        </div>
-            <button type="submit" class="btn btn-primary" onclick = "function_1()">Show Existing Portfolio</button>
             <form id = "next" action="/function1/results" method="post">
 
 
