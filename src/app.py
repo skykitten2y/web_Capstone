@@ -234,26 +234,36 @@ def existing_portfolio_options():
         input_portfolio = Database.find_one("surveys", {"email": session.get('email', None)})['given_portfolio']
         stocks = []
         weights = []
-
+        portfolio = []
         for keys in input_portfolio.keys():
             stocks.append(keys)
 
         for keys in input_portfolio.keys():
             weights.append(input_portfolio[keys])
 
-        return render_template("given_portfolio_ask.html", stocks=stocks, weights= weights) #given_portfolio_ask.thml
+        for i in range(len(stocks)):
+            portfolio.append(stocks[i])
+            portfolio.append[weights[i]]
+
+
+        return render_template("given_portfolio_ask.html", portfolio=portfolio) #given_portfolio_ask.thml
     elif (e_answer_q16 == "Get the optimal portfolio without return"):
         input_portfolio = Database.find_one("surveys", {"email": session.get('email', None)})['given_portfolio']
         stocks = []
         weights = []
-
+        portfolio = []
         for keys in input_portfolio.keys():
             stocks.append(keys)
 
         for keys in input_portfolio.keys():
             weights.append(input_portfolio[keys])
 
-        return render_template("function2_input_portfolio.html" ,stocks=stocks, weights= weights)
+        for i in stocks:
+            portfolio.append(stocks[i])
+            portfolio.append[weights[i]]
+
+
+        return render_template("function2_input_portfolio.html" ,portfolio = portfolio)
     elif (e_answer_q16 == "Get the optimal portfolio with return"):
         return render_template("portfolio_with_return_ask.html")
     else:
